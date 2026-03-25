@@ -266,6 +266,12 @@ nav.scrolled {
     radial-gradient(ellipse 60% 40% at 10% 50%, rgba(92,18,5,.25) 0%, transparent 60%),
     radial-gradient(ellipse 50% 60% at 90% 30%, rgba(184,116,14,.08) 0%, transparent 55%);
 }
+#signatures::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(184,116,14,.035) 48%, transparent 52%, transparent 100%),
+    linear-gradient(180deg, rgba(240,236,229,.025) 0%, transparent 18%, transparent 100%);
+}
 
 .sig-intro {
   padding:100px 60px 0;
@@ -279,18 +285,23 @@ nav.scrolled {
 .sig-intro-right p { font-size:15px; line-height:1.8; color:rgba(240,236,229,.5); font-weight:300; max-width:400px; }
 
 /* ── BIG SANDWICH CARDS ── */
-.sig-cards { margin-top:60px; }
+.sig-cards { margin-top:60px; position:relative; z-index:2; }
 
 .sig-card {
   display:grid;
   border-top:1px solid rgba(184,116,14,.12);
   position:relative; overflow:hidden;
-  transition:background .5s;
+  background:linear-gradient(90deg, rgba(62,12,3,.28) 0%, rgba(26,8,4,.12) 100%);
+  transition:background .5s, transform .45s, box-shadow .45s;
   cursor:pointer;
 }
 .sig-card:nth-child(odd)  { grid-template-columns:52% 48%; }
 .sig-card:nth-child(even) { grid-template-columns:48% 52%; }
-.sig-card:hover { background:rgba(92,18,5,.12); }
+.sig-card:hover {
+  background:linear-gradient(90deg, rgba(92,18,5,.38) 0%, rgba(40,12,6,.2) 100%);
+  transform:translateY(-4px);
+  box-shadow:0 30px 70px rgba(0,0,0,.18);
+}
 
 /* Animated left border reveal */
 .sig-card::after {
@@ -306,7 +317,14 @@ nav.scrolled {
   padding:70px 60px; display:flex; flex-direction:column; justify-content:center;
   position:relative; z-index:2;
 }
+.sc-text::before {
+  content:''; position:absolute; inset:24px 18px 24px 0;
+  border:1px solid rgba(184,116,14,.08);
+  background:linear-gradient(180deg, rgba(255,255,255,.015), transparent 28%);
+  pointer-events:none;
+}
 .sig-card:nth-child(even) .sc-text { order:2; padding-left:70px; }
+.sig-card:nth-child(even) .sc-text::before { inset:24px 0 24px 18px; }
 
 .sc-number {
   font-family:'Playfair Display',serif; font-size:120px; font-weight:900;
@@ -318,6 +336,7 @@ nav.scrolled {
 .sc-name {
   font-family:'Playfair Display',serif; font-size:clamp(32px,3.5vw,52px);
   font-weight:900; color:var(--stone); line-height:1; letter-spacing:-1px; margin-bottom:8px;
+  text-wrap:balance;
 }
 .sc-aka { font-family:'Lato',sans-serif; font-style:italic; font-size:15px; color:rgba(240,236,229,.4); margin-bottom:22px; }
 .sc-desc { font-size:14px; line-height:1.8; color:rgba(240,236,229,.58); font-weight:300; max-width:420px; margin-bottom:28px; }
@@ -347,15 +366,34 @@ nav.scrolled {
 /* Card image */
 .sc-img {
   position:relative; overflow:hidden; min-height:540px;
-  background:var(--maroon-d);
+  display:flex; align-items:center; justify-content:center;
+  padding:34px;
+  background:
+    radial-gradient(circle at top, rgba(184,116,14,.16), transparent 55%),
+    linear-gradient(180deg, rgba(122,26,8,.4), rgba(62,12,3,1));
 }
 .sig-card:nth-child(even) .sc-img { order:1; }
+.sc-img::before {
+  content:''; position:absolute; inset:22px;
+  border:1px solid rgba(240,236,229,.08);
+  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent 22%);
+  pointer-events:none; z-index:1;
+}
+.sc-img::after {
+  content:''; position:absolute; left:10%; right:10%; bottom:20px; height:36px;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.35) 0%, transparent 72%);
+  filter:blur(10px);
+  pointer-events:none; z-index:1;
+}
 .sc-img img {
-  width:100%; height:100%; object-fit:cover; object-position:center top;
+  width:100%; height:100%;
+  max-width:90%; max-height:88%;
+  object-fit:contain; object-position:center;
   transition:transform .8s cubic-bezier(.22,1,.36,1), filter .5s;
   filter:brightness(.85) saturate(1.1);
+  position:relative; z-index:2;
 }
-.sig-card:hover .sc-img img { transform:scale(1.06); filter:brightness(1) saturate(1.2); }
+.sig-card:hover .sc-img img { transform:scale(1.03); filter:brightness(1) saturate(1.2); }
 
 /* Overlays on image */
 .sc-img-overlay {
@@ -396,43 +434,170 @@ nav.scrolled {
 }
 #more-menu::before {
   content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184,116,14,.08) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(184,116,14,.08) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(240,236,229,.02) 0%, transparent 40%);
 }
 
-.more-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; }
-.more-link { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(184,116,14,.35); padding-bottom:2px; transition:color .3s; }
+.more-header { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:20px; position:relative; z-index:2; }
+.more-copy {
+  max-width:620px;
+  margin-bottom:56px;
+  font-size:15px; line-height:1.85; font-weight:300;
+  color:rgba(240,236,229,.58);
+  position:relative; z-index:2;
+}
+.more-link { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(184,116,14,.35); padding-bottom:2px; transition:color .3s; white-space:nowrap; }
 .more-link:hover { color:var(--amber-ll); }
+.mosaic, .mc { display:none; }
 
-.mosaic { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(184,116,14,.1); position:relative; z-index:2; }
-
-.mc {
-  background:var(--maroon-d); padding:36px 28px;
+.menu-groups {
+  display:flex; flex-direction:column; gap:34px;
+  position:relative; z-index:2;
+}
+.menu-group {
+  border:1px solid rgba(184,116,14,.15);
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(26,8,4,.18) 18%, rgba(26,8,4,.3) 100%);
+  padding:32px;
   position:relative; overflow:hidden;
-  transition:background .35s, transform .35s;
-  cursor:pointer;
+  backdrop-filter:blur(10px);
+  box-shadow:0 24px 60px rgba(0,0,0,.12);
 }
-.mc::before {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
-  background:linear-gradient(to right,var(--amber),var(--amber-l));
-  transform:scaleX(0); transition:transform .4s cubic-bezier(.22,1,.36,1);
+.menu-group::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, rgba(184,116,14,.75), transparent);
 }
-.mc:hover { background:rgba(92,18,5,.5); }
-.mc:hover::before { transform:scaleX(1); }
+.menu-group::after {
+  content:''; position:absolute; inset:auto -10% -30% auto; width:280px; height:280px;
+  background:radial-gradient(circle, rgba(184,116,14,.07), transparent 65%);
+  pointer-events:none;
+}
+.menu-group:nth-child(2)::after { background:radial-gradient(circle, rgba(240,236,229,.05), transparent 65%); }
+.menu-group:nth-child(3)::after { background:radial-gradient(circle, rgba(212,150,10,.09), transparent 65%); }
+.menu-group-head {
+  display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+  margin-bottom:24px; padding-bottom:20px;
+  border-bottom:1px solid rgba(184,116,14,.12);
+}
+.menu-group-kicker {
+  font-size:10px; letter-spacing:5px; text-transform:uppercase;
+  color:rgba(212,150,10,.8); margin-bottom:8px;
+}
+.menu-group-title {
+  font-family:'Playfair Display',serif;
+  font-size:34px; font-weight:700; line-height:1;
+  color:var(--stone);
+}
+.menu-group-copy {
+  max-width:440px;
+  font-size:13px; line-height:1.8;
+  color:rgba(240,236,229,.45);
+}
 
-.mc-num {
-  font-family:'Playfair Display',serif; font-size:48px; font-weight:900;
-  color:rgba(184,116,14,.12); line-height:1; margin-bottom:6px;
-  transition:color .4s;
+.menu-grid {
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:22px;
 }
-.mc:hover .mc-num { color:rgba(184,116,14,.25); }
-
-.mc-name {
-  font-family:'Playfair Display',serif; font-size:18px; font-weight:700;
-  color:var(--stone); margin-bottom:4px; line-height:1.2;
+.menu-card {
+  background:rgba(14,5,3,.88);
+  border:1px solid rgba(184,116,14,.12);
+  overflow:hidden;
+  position:relative;
+  transition:transform .35s, border-color .35s, box-shadow .35s, background .35s;
 }
-.mc-aka { font-size:11px; font-style:italic; color:rgba(240,236,229,.38); margin-bottom:12px; }
-.mc-desc { font-size:12px; line-height:1.65; color:rgba(240,236,229,.45); font-weight:300; margin-bottom:16px; }
-.mc-price { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--amber-l); }
+.menu-card:hover {
+  transform:translateY(-6px);
+  border-color:rgba(184,116,14,.35);
+  box-shadow:0 22px 50px rgba(0,0,0,.22);
+  background:rgba(20,7,4,.96);
+}
+.menu-card::after {
+  content:''; position:absolute; left:18px; right:18px; bottom:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(184,116,14,.5), transparent);
+  opacity:.45;
+}
+.menu-card-media {
+  aspect-ratio:5 / 4;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top, rgba(184,116,14,.16), transparent 58%),
+    linear-gradient(180deg, rgba(184,116,14,.18), rgba(62,12,3,.35));
+}
+.menu-card-media img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  display:block;
+  transition:transform .6s ease, filter .4s ease;
+  filter:saturate(1.03);
+}
+.menu-card:hover .menu-card-media img {
+  transform:scale(1.06);
+  filter:saturate(1.1);
+}
+.menu-card-body { padding:22px 22px 24px; position:relative; }
+.menu-card-body::before {
+  content:''; position:absolute; left:22px; right:22px; top:0; height:1px;
+  background:linear-gradient(90deg, rgba(240,236,229,.02), rgba(184,116,14,.22), rgba(240,236,229,.02));
+}
+.menu-card-top {
+  display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+  margin-bottom:8px;
+}
+.menu-card-kicker {
+  font-size:10px; letter-spacing:4px; text-transform:uppercase;
+  color:rgba(212,150,10,.78); margin-bottom:8px;
+}
+.menu-card-name {
+  font-family:'Playfair Display',serif;
+  font-size:27px; font-weight:700; line-height:1.05;
+  color:var(--stone);
+}
+.menu-card-aka {
+  font-size:11px; font-style:italic;
+  color:rgba(240,236,229,.38); margin-bottom:12px;
+}
+.menu-card-desc {
+  font-size:13px; line-height:1.75; font-weight:300;
+  color:rgba(240,236,229,.56);
+}
+.menu-card-price {
+  font-family:'Playfair Display',serif;
+  font-size:28px; font-weight:700; line-height:1;
+  color:var(--amber-l);
+  flex-shrink:0;
+}
+.menu-note {
+  margin-top:28px;
+  padding:22px 24px;
+  border:1px solid rgba(184,116,14,.18);
+  background:
+    linear-gradient(135deg, rgba(184,116,14,.08), rgba(62,12,3,.14)),
+    rgba(184,116,14,.06);
+  display:flex; justify-content:space-between; gap:24px; align-items:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+.menu-note-kicker {
+  font-size:10px; letter-spacing:5px; text-transform:uppercase;
+  color:rgba(212,150,10,.85); margin-bottom:8px;
+}
+.menu-note h3 {
+  font-family:'Playfair Display',serif;
+  font-size:30px; font-weight:700; color:var(--stone); margin-bottom:6px;
+}
+.menu-note p {
+  max-width:680px;
+  font-size:13px; line-height:1.8; font-weight:300;
+  color:rgba(240,236,229,.56);
+}
+.menu-note-tag {
+  font-family:'Oswald',sans-serif;
+  font-size:11px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--maroon-d); background:var(--amber);
+  padding:12px 18px;
+  clip-path:polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  white-space:nowrap;
+}
 
 /* ══════════════════════════════
    PHILOSOPHY — SPLIT DARK/LIGHT
@@ -727,10 +892,11 @@ footer {
   .sig-intro { grid-template-columns:1fr; padding:80px 28px 0; }
   .sig-card { grid-template-columns:1fr !important; }
   .sig-card:nth-child(even) .sc-text, .sig-card:nth-child(even) .sc-img { order:unset; }
-  .sc-img { min-height:360px; }
+  .sc-img { min-height:360px; padding:20px; }
   .sc-text { padding:44px 28px; }
   #more-menu { padding:80px 28px; }
-  .mosaic { grid-template-columns:1fr 1fr; }
+  .more-header, .menu-group-head, .menu-note { flex-direction:column; align-items:flex-start; }
+  .menu-grid { grid-template-columns:1fr 1fr; }
   #philosophy { grid-template-columns:1fr; }
   .phil-light { min-height:380px; }
   .phil-dark { padding:80px 28px; }
@@ -748,7 +914,8 @@ footer {
 }
 @media(max-width:600px){
   .hero-h1 { font-size:clamp(48px,12vw,80px); }
-  .mosaic { grid-template-columns:1fr; }
+  .menu-group { padding:24px 18px; }
+  .menu-grid { grid-template-columns:1fr; }
   .phil-pillars { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr; }
   .hero-stats { display:none; }
@@ -798,7 +965,7 @@ footer {
   <canvas id="heroCanvas"></canvas>
 
   <div class="hero-bg-img">
-    <img src="images/overthinker.png" alt="The Overthinker">
+    <img src="images/double-animal-burger.png" alt="The Overthinker">
   </div>
 
   <div class="hero-text">
@@ -821,7 +988,7 @@ footer {
 
   <div class="hero-stats">
     <div class="hs"><div class="hs-num">4.9★</div><div class="hs-lbl">Rating</div></div>
-    <div class="hs"><div class="hs-num">18+</div><div class="hs-lbl">Creations</div></div>
+    <div class="hs"><div class="hs-num">10+</div><div class="hs-lbl">Featured Items</div></div>
     <div class="hs"><div class="hs-num">100%</div><div class="hs-lbl">Local SA</div></div>
   </div>
 
@@ -837,17 +1004,21 @@ footer {
     <span class="ti">The Overthinker</span><span class="td">✦</span>
     <span class="ti">Lean Logic</span><span class="td">✦</span>
     <span class="ti">The Existential Onion</span><span class="td">✦</span>
-    <span class="ti">Steak & Argument</span><span class="td">✦</span>
+    <span class="ti">Golden Manuscript</span><span class="td">✦</span>
+    <span class="ti">Falafel Paradox</span><span class="td">✦</span>
+    <span class="ti">The Big Bite</span><span class="td">✦</span>
     <span class="ti">Fresh Daily · Adelaide SA</span><span class="td">✦</span>
     <span class="ti">Est. 2024</span><span class="td">✦</span>
-    <span class="ti">100% Local Produce</span><span class="td">✦</span>
+    <span class="ti">Weekend Drops</span><span class="td">✦</span>
     <span class="ti">The Overthinker</span><span class="td">✦</span>
     <span class="ti">Lean Logic</span><span class="td">✦</span>
     <span class="ti">The Existential Onion</span><span class="td">✦</span>
-    <span class="ti">Steak & Argument</span><span class="td">✦</span>
+    <span class="ti">Golden Manuscript</span><span class="td">✦</span>
+    <span class="ti">Falafel Paradox</span><span class="td">✦</span>
+    <span class="ti">The Big Bite</span><span class="td">✦</span>
     <span class="ti">Fresh Daily · Adelaide SA</span><span class="td">✦</span>
     <span class="ti">Est. 2024</span><span class="td">✦</span>
-    <span class="ti">100% Local Produce</span><span class="td">✦</span>
+    <span class="ti">Weekend Drops</span><span class="td">✦</span>
   </div>
 </div>
 
@@ -859,7 +1030,7 @@ footer {
       <h2 class="s-title">Three Reasons<br><em>to Come Back.</em></h2>
     </div>
     <div class="sig-intro-right reveal rd2">
-      <p>These are the three that started it all — each named for a philosophy, each built with the same obsessive attention to craft. Our regulars can't stop ordering them. Neither will you.</p>
+      <p>These are the signatures that define Sandwich Philosophy: three crowd favourites built with serious intent, loaded with personality, and now joined by wraps, melts, and desserts that carry the same energy.</p>
     </div>
   </div>
 
@@ -872,7 +1043,7 @@ footer {
         <div class="sc-tag">Signature · Double Beef</div>
         <h3 class="sc-name">The Overthinker</h3>
         <div class="sc-aka">AKA The Double Animal Burger</div>
-        <p class="sc-desc">Two smash patties stacked impossibly high. American cheese melted into submission. Caramelised onions, crisp lettuce, tomato, pickles, and house special sauce dripping off the bottom bun. This isn't a burger — it's a commitment. You will think about it long after you've finished it.</p>
+        <p class="sc-desc">Two smash patties animal style wrestling under molten cheese, tangled in pickles, lettuce, tomato, and animal sauce. Built for the moments when choosing one thing feels impossible, so we gave you everything.</p>
         <div class="sc-meta">
           <span class="sc-price">$19</span>
           <div>
@@ -885,7 +1056,7 @@ footer {
       <div class="sc-img">
         <div class="sc-pill pill-amber">Most Ordered</div>
         <div class="sc-img-overlay"></div>
-        <img src="images/overthinker.png" alt="The Overthinker">
+        <img src="images/double-animal-burger.png" alt="The Overthinker">
         <div class="sc-img-hover"><span>Order The Overthinker →</span></div>
       </div>
     </div>
@@ -897,7 +1068,7 @@ footer {
         <div class="sc-tag">Signature · Grilled Chicken</div>
         <h3 class="sc-name">Lean Logic</h3>
         <div class="sc-aka">AKA The Grilled Chicken Sandwich</div>
-        <p class="sc-desc">A herb-marinated grilled chicken thigh, charred to perfection and crowned with a mountain of house slaw. Swiss cheese cascades over the bottom bun. Clean. Fresh. Satisfying in every dimension. Sometimes the logical choice is also the most delicious one. Lean Logic proves it.</p>
+        <p class="sc-desc">Simple, sharp, and straightforward. Herb-marinated grilled chicken, balanced slaw, and melted cheese on a soft bun. Proof that less really can be more when every part of the build pulls its weight.</p>
         <div class="sc-meta">
           <span class="sc-price">$17</span>
           <div>
@@ -910,7 +1081,7 @@ footer {
       <div class="sc-img">
         <div class="sc-pill pill-dark">Fan Favourite</div>
         <div class="sc-img-overlay"></div>
-        <img src="images/lean-logic.png" alt="Lean Logic">
+        <img src="images/grilled-chicken.png" alt="Lean Logic">
         <div class="sc-img-hover"><span>Order Lean Logic →</span></div>
       </div>
     </div>
@@ -922,7 +1093,7 @@ footer {
         <div class="sc-tag">Signature · Oklahoma Smash</div>
         <h3 class="sc-name">The Existential Onion</h3>
         <div class="sc-aka">AKA The Oklahoma Smash Burger</div>
-        <p class="sc-desc">A thin smashed beef patty seared hard into a bed of thinly sliced onions — the true Oklahoma method. One thick slice of American cheese draped over the top like a philosophical declaration. Why is the onion there? Why are any of us here? We don't have all the answers. But we have this.</p>
+        <p class="sc-desc">An Oklahoma onion burger smashed straight into a tangle of onions, crowned with melted cheese, and dripping with flavour. It is messy, savoury, and exactly the sort of decision you will be happy to rethink.</p>
         <div class="sc-meta">
           <span class="sc-price">$15</span>
           <div>
@@ -935,7 +1106,7 @@ footer {
       <div class="sc-img">
         <div class="sc-pill pill-amber" style="background:var(--maroon);color:var(--amber-ll);border:1px solid rgba(184,116,14,.4);">New</div>
         <div class="sc-img-overlay"></div>
-        <img src="images/existential-onion.png" alt="The Existential Onion">
+        <img src="images/onion-burger.png" alt="The Existential Onion">
         <div class="sc-img-hover"><span>Order The Existential Onion →</span></div>
       </div>
     </div>
@@ -947,10 +1118,183 @@ footer {
 <section id="more-menu">
   <div class="more-header reveal">
     <div>
-      <div class="s-eyebrow">Also On The Menu</div>
+      <div class="s-eyebrow">Expanded Menu</div>
       <h2 class="s-title">The Full<br><em>Philosophy</em></h2>
     </div>
-    <a href="#" class="more-link">View Full Menu →</a>
+    <a href="#cta" class="more-link">Preorder The Weekend Drop →</a>
+  </div>
+  <p class="more-copy reveal rd1">Our menu changes weekly, but the philosophies stay the same. Every burger has a point of view, every wrap brings its own argument, and every dessert closes the conversation with something memorable.</p>
+  <div class="menu-groups">
+    <div class="menu-group reveal">
+      <div class="menu-group-head">
+        <div>
+          <div class="menu-group-kicker">Core Beliefs</div>
+          <h3 class="menu-group-title">Burgers &amp; Sandwiches</h3>
+        </div>
+        <p class="menu-group-copy">The central theories of the menu: indulgent, playful, and built to feel like the main event.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/fried-chicken-sandwich.png" alt="False Premise"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Burger</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">False Premise</h4>
+                <div class="menu-card-aka">AKA Fried Chicken Sandwich</div>
+              </div>
+              <div class="menu-card-price">$18</div>
+            </div>
+            <p class="menu-card-desc">Crispy fried chicken, cool slaw, and melted cheese on a soft bun. Crunchy, rich, and unapologetically satisfying.</p>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/patty-melt.png" alt="The Meltdown"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Melt</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">The Meltdown</h4>
+                <div class="menu-card-aka">AKA The Patty Melt</div>
+              </div>
+              <div class="menu-card-price">$18</div>
+            </div>
+            <p class="menu-card-desc">Smash-grilled beef patties tucked between buttery toasted bread with molten cheese and caramelised onions. Not quite a burger, not quite a toastie, absolutely worth ordering.</p>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/double-animal-burger.png" alt="The Thinker"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Classic</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">The Thinker</h4>
+                <div class="menu-card-aka">AKA Smash Burger</div>
+              </div>
+              <div class="menu-card-price">$15</div>
+            </div>
+            <p class="menu-card-desc">A stripped-back smash burger with molten cheese, pickles, lettuce, tomato, and sauce. All the satisfaction of the house style in a cleaner, punchier build.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="menu-group reveal rd1">
+      <div class="menu-group-head">
+        <div>
+          <div class="menu-group-kicker">Wrapped Arguments</div>
+          <h3 class="menu-group-title">Wraps &amp; Street Favourites</h3>
+        </div>
+        <p class="menu-group-copy">The part of the menu that brings movement, heat, and plenty of personality, from Lebanese bread to homemade Egyptian bread.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/shawarma.png" alt="Golden Manuscript"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Wrap</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">Golden Manuscript</h4>
+                <div class="menu-card-aka">AKA Chicken Shawarma</div>
+              </div>
+              <div class="menu-card-price">$18</div>
+            </div>
+            <p class="menu-card-desc">Juicy marinated chicken shaved fresh and wrapped in Lebanese bread with garlic sauce, tomato, pickles, and fries inside. A street classic with Sandwich Philosophy's twist.</p>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/falafel.png" alt="Falafel Paradox"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Vegetarian</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">Falafel Paradox</h4>
+                <div class="menu-card-aka">AKA Falafel Sandwich</div>
+              </div>
+              <div class="menu-card-price">$15</div>
+            </div>
+            <p class="menu-card-desc">Crispy falafel with fried eggplant, tomato, cucumber, pickles, and golden fries tucked inside homemade Egyptian bread. Bright, crunchy, and full of bite.</p>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/grilled-chicken.png" alt="Lean Logic"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Balanced Choice</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">Lean Logic</h4>
+                <div class="menu-card-aka">AKA Grilled Chicken Sandwich</div>
+              </div>
+              <div class="menu-card-price">$17</div>
+            </div>
+            <p class="menu-card-desc">The cleanest line in the menu: grilled chicken, house slaw, soft bun, and a measured amount of richness that never overwhelms the build.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="menu-group reveal rd2">
+      <div class="menu-group-head">
+        <div>
+          <div class="menu-group-kicker">Sweet Conclusions</div>
+          <h3 class="menu-group-title">Desserts</h3>
+        </div>
+        <p class="menu-group-copy">Fresh-baked finishes for the weekend drop: warm, nostalgic, and just indulgent enough to feel like a reward.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/big-bite-cookie.png" alt="The Big Bite"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Cookie</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">The Big Bite</h4>
+                <div class="menu-card-aka">AKA NYC Cookie</div>
+              </div>
+              <div class="menu-card-price">$7</div>
+            </div>
+            <p class="menu-card-desc">Thick, chunky, and soft-baked with molten pockets of chocolate. Crisp at the edges, gooey at the centre, and far too good to share.</p>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/sticky-subject-cinnamon-roll.png" alt="Sticky Subject"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Pastry</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">Sticky Subject</h4>
+                <div class="menu-card-aka">AKA Cinnamon Roll</div>
+              </div>
+              <div class="menu-card-price">$8</div>
+            </div>
+            <p class="menu-card-desc">Soft, fluffy rolls spiralled with cinnamon sugar and dripping with glaze. Warm, messy, and impossible to debate once you take a bite.</p>
+          </div>
+        </article>
+        <article class="menu-card">
+          <div class="menu-card-media"><img src="images/golden-debate-basbousa.png" alt="The Golden Debate"></div>
+          <div class="menu-card-body">
+            <div class="menu-card-kicker">Cake</div>
+            <div class="menu-card-top">
+              <div>
+                <h4 class="menu-card-name">The Golden Debate</h4>
+                <div class="menu-card-aka">AKA Basbousa</div>
+              </div>
+              <div class="menu-card-price">$7</div>
+            </div>
+            <p class="menu-card-desc">A golden semolina cake baked until tender and soaked in fragrant syrup. Sweet, nutty, and quietly rich in the most comforting way.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="menu-note reveal rd3">
+      <div>
+        <div class="menu-note-kicker">Friday Reveal</div>
+        <h3>The Thinkin' Chicken</h3>
+        <p>Every Friday, Shams drops a limited mystery sandwich with no repeats and no guarantees beyond big flavour. It is the most experimental part of the menu, and it only lasts until sold out.</p>
+      </div>
+      <div class="menu-note-tag">Limited Drop</div>
+    </div>
   </div>
   <div class="mosaic">
     <div class="mc reveal">
@@ -1028,10 +1372,10 @@ footer {
   </div>
   <div class="phil-light">
     <div class="phil-light-img">
-      <img src="images/lean-logic.png" alt="Lean Logic">
+      <img src="images/grilled-chicken.png" alt="Lean Logic">
     </div>
     <div class="phil-stats reveal-right">
-      <div class="pstat"><div class="pstat-n">18+</div><div class="pstat-l">Menu Items</div></div>
+      <div class="pstat"><div class="pstat-n">10+</div><div class="pstat-l">Featured Items</div></div>
       <div class="pstat"><div class="pstat-n">100%</div><div class="pstat-l">Local SA</div></div>
       <div class="pstat"><div class="pstat-n">4.9★</div><div class="pstat-l">Avg Rating</div></div>
       <div class="pstat"><div class="pstat-n">2024</div><div class="pstat-l">Est. Adelaide</div></div>
@@ -1165,8 +1509,8 @@ footer {
         <li>The Overthinker</li>
         <li>Lean Logic</li>
         <li>The Existential Onion</li>
-        <li>Steak & Argument</li>
-        <li>View Full Menu</li>
+        <li>Golden Manuscript</li>
+        <li>Falafel Paradox</li>
       </ul>
     </div>
     <div class="fc">
