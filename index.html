@@ -425,6 +425,69 @@ nav.scrolled {
 }
 
 /* ══════════════════════════════
+   PROMISE / BELIEFS
+══════════════════════════════ */
+#beliefs {
+  background:
+    radial-gradient(circle at 22% 16%, rgba(184,116,14,.16), transparent 2%),
+    linear-gradient(180deg, #6f1808 0%, #661607 24%, #571105 54%, #3f0c03 100%);
+  padding:100px 60px 86px;
+  position:relative;
+  overflow:hidden;
+}
+#beliefs::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 46% at 50% 0%, rgba(184,116,14,.15), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.03), transparent 30%);
+  pointer-events:none;
+}
+.beliefs-head {
+  position:relative;
+  z-index:1;
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 58px;
+}
+.beliefs-head .s-eyebrow { justify-content:center; margin-bottom:18px; }
+.beliefs-grid {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  border-top:1px solid rgba(184,116,14,.16);
+  border-bottom:1px solid rgba(184,116,14,.1);
+  background:rgba(92,18,5,.16);
+}
+.belief-card {
+  padding:46px 30px 40px;
+  border-right:1px solid rgba(184,116,14,.14);
+}
+.belief-card:last-child { border-right:none; }
+.belief-mark {
+  font-family:'Oswald',sans-serif;
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--amber-ll);
+  margin-bottom:22px;
+}
+.belief-card h3 {
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  font-weight:700;
+  color:var(--stone);
+  margin-bottom:14px;
+}
+.belief-card p {
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(240,236,229,.56);
+}
+
+/* ══════════════════════════════
    MORE MENU — MOSAIC GRID
 ══════════════════════════════ */
 #more-menu {
@@ -606,12 +669,12 @@ nav.scrolled {
 ══════════════════════════════ */
 #philosophy {
   display:grid; grid-template-columns:1fr 1fr;
-  min-height:90vh; position:relative;
+  min-height:72vh; position:relative;
 }
 
 .phil-dark {
   background:var(--maroon);
-  padding:100px 70px 100px 60px;
+  padding:72px 70px 60px 60px;
   display:flex; flex-direction:column; justify-content:center;
   position:relative; overflow:hidden;
 }
@@ -625,29 +688,11 @@ nav.scrolled {
 .phil-dark .s-title { margin-bottom:24px; }
 .phil-dark p { font-size:15px; line-height:1.85; color:rgba(240,236,229,.65); font-weight:300; margin-bottom:18px; max-width:430px; }
 
-.phil-pillars { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:36px; }
-.pillar {
-  border:1px solid rgba(184,116,14,.2);
-  padding:22px 18px;
-  transition:border-color .35s,background .35s,transform .35s;
-  position:relative; overflow:hidden;
-}
-.pillar::before {
-  content:''; position:absolute; inset:0;
-  background:rgba(184,116,14,.06);
-  transform:translateY(100%);
-  transition:transform .4s cubic-bezier(.22,1,.36,1);
-}
-.pillar:hover { border-color:rgba(184,116,14,.5); transform:translateY(-4px); }
-.pillar:hover::before { transform:translateY(0); }
-.pi { font-size:22px; margin-bottom:8px; }
-.pillar h4 { font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; color:var(--stone); margin-bottom:6px; position:relative; z-index:1; }
-.pillar p { font-size:12px; color:rgba(240,236,229,.5); margin:0; line-height:1.6; position:relative; z-index:1; }
-
 .phil-light {
   background:var(--stone);
   position:relative; overflow:hidden;
   display:flex; flex-direction:column; justify-content:flex-end;
+  min-height:520px;
 }
 .phil-light-img { position:absolute; inset:0; }
 .phil-light-img img { width:100%; height:100%; object-fit:cover; object-position:center top; filter:brightness(.6) saturate(.9); }
@@ -725,6 +770,499 @@ nav.scrolled {
 .tl-line { width:1px; height:28px; background:var(--amber); margin:0 auto 18px; opacity:.3; }
 .tl-h { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--stone); margin-bottom:10px; }
 .tl-p { font-size:13px; line-height:1.7; color:rgba(240,236,229,.45); font-weight:300; }
+
+/* ══════════════════════════════
+   PREORDER + MYSTERY DROPS
+══════════════════════════════ */
+#preorder-drop,
+#mystery-drop {
+  position:relative;
+  overflow:hidden;
+}
+
+#preorder-drop {
+  padding:110px 60px 96px;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(184,116,14,.2), transparent 20%),
+    radial-gradient(ellipse 70% 65% at 50% 100%, rgba(184,116,14,.12), transparent 62%),
+    linear-gradient(180deg, #32130b 0%, #210a06 55%, #130604 100%);
+}
+
+#preorder-drop::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(240,236,229,.06), transparent 24%),
+    radial-gradient(circle at 82% 24%, rgba(184,116,14,.12), transparent 18%);
+  opacity:.9;
+  pointer-events:none;
+}
+
+.preorder-wrap {
+  position:relative;
+  z-index:1;
+  max-width:1040px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.drop-kicker {
+  font-size:10px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  color:rgba(184,116,14,.72);
+  margin-bottom:22px;
+}
+
+.drop-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,8vw,110px);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-2px;
+  color:var(--stone);
+  margin-bottom:24px;
+}
+
+.drop-title em {
+  display:block;
+  font-style:italic;
+  font-weight:400;
+  color:var(--amber-l);
+}
+
+.drop-copy {
+  max-width:680px;
+  margin:0 auto 42px;
+  font-size:16px;
+  line-height:1.8;
+  color:rgba(240,236,229,.5);
+  font-weight:300;
+}
+
+.drop-actions {
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:60px;
+}
+
+.drop-divider {
+  width:min(100%, 760px);
+  margin:0 auto 34px;
+  border-top:1px solid rgba(184,116,14,.14);
+}
+
+.preorder-countdown {
+  display:grid;
+  grid-template-columns:repeat(4, minmax(120px, 1fr));
+  gap:0;
+  width:min(100%, 760px);
+  margin:0 auto;
+}
+
+.count-card {
+  position:relative;
+  padding:18px 20px 10px;
+}
+
+.count-card::after {
+  content:'';
+  position:absolute;
+  top:18px;
+  right:0;
+  width:1px;
+  height:74px;
+  background:rgba(184,116,14,.14);
+}
+
+.count-card:last-child::after { display:none; }
+
+.count-value {
+  display:block;
+  font-family:'Playfair Display',serif;
+  font-size:50px;
+  font-weight:900;
+  line-height:1;
+  color:var(--amber-l);
+}
+
+.count-label {
+  display:block;
+  margin-top:8px;
+  font-size:10px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:rgba(240,236,229,.28);
+}
+
+#mystery-drop {
+  padding:110px 60px;
+  background:
+    radial-gradient(circle at 76% 42%, rgba(184,116,14,.12), transparent 18%),
+    linear-gradient(90deg, #240b06 0%, #190705 50%, #130403 100%);
+}
+
+#mystery-drop::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(184,116,14,.08), transparent 10%),
+    radial-gradient(circle at 84% 20%, rgba(184,116,14,.2), transparent 1%),
+    linear-gradient(180deg, rgba(92,18,5,.18), transparent 45%);
+  pointer-events:none;
+}
+
+.mystery-wrap {
+  position:relative;
+  z-index:1;
+  max-width:1240px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0, 1.15fr) 420px;
+  gap:70px;
+  align-items:center;
+}
+
+.mystery-copy {
+  max-width:900px;
+}
+
+.mystery-kicker {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  font-size:10px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  color:rgba(184,116,14,.78);
+  margin-bottom:20px;
+}
+
+.mystery-kicker::before {
+  content:'';
+  width:30px;
+  height:1px;
+  background:var(--amber);
+}
+
+.mystery-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(56px,8vw,102px);
+  font-weight:900;
+  line-height:.92;
+  letter-spacing:-2px;
+  color:var(--stone);
+  margin-bottom:28px;
+}
+
+.mystery-title em {
+  display:block;
+  font-style:italic;
+  font-weight:400;
+  color:var(--amber-l);
+}
+
+.mystery-text {
+  max-width:860px;
+  font-size:17px;
+  line-height:1.9;
+  color:rgba(240,236,229,.46);
+  font-weight:300;
+}
+
+.mystery-text + .mystery-text {
+  margin-top:20px;
+}
+
+.mystery-highlight {
+  margin:48px 0 34px;
+  border:1px solid rgba(184,116,14,.22);
+  background:linear-gradient(180deg, rgba(184,116,14,.06), rgba(62,12,3,.16));
+  padding:34px 32px;
+}
+
+.mystery-highlight-kicker {
+  font-size:11px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:14px;
+}
+
+.mystery-highlight h3 {
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:700;
+  color:var(--stone);
+  margin-bottom:10px;
+}
+
+.mystery-highlight p {
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(240,236,229,.42);
+}
+
+.mystery-orbit {
+  position:relative;
+  width:min(100%, 420px);
+  aspect-ratio:1 / 1;
+  margin-inline:auto;
+  border-radius:50%;
+  border:1px dashed rgba(184,116,14,.14);
+}
+
+.mystery-orbit::before,
+.mystery-orbit::after {
+  content:'';
+  position:absolute;
+  border-radius:50%;
+}
+
+.mystery-orbit::before {
+  inset:14%;
+  border:1px solid rgba(184,116,14,.16);
+}
+
+.mystery-orbit::after {
+  width:16px;
+  height:16px;
+  top:10%;
+  right:18%;
+  background:var(--amber-l);
+  box-shadow:0 0 18px rgba(212,150,10,.4);
+}
+
+.mystery-mark {
+  position:absolute;
+  inset:50%;
+  transform:translate(-50%, -50%);
+  width:56%;
+  aspect-ratio:1 / 1;
+  border-radius:50%;
+  border:1px solid rgba(184,116,14,.18);
+  background:radial-gradient(circle at 30% 30%, rgba(92,18,5,.58), rgba(26,8,4,.92));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.mystery-mark span {
+  font-family:'Playfair Display',serif;
+  font-size:150px;
+  line-height:1;
+  color:rgba(184,116,14,.28);
+}
+
+.mystery-ring-copy {
+  position:absolute;
+  top:25%;
+  left:50%;
+  transform:translateX(-50%) rotate(-12deg);
+  font-size:9px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:rgba(184,116,14,.42);
+}
+
+/* ══════════════════════════════
+   JOURNEY
+══════════════════════════════ */
+#journey {
+  position:relative;
+  padding:120px 60px 110px;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(212,150,10,.12), transparent 2%),
+    radial-gradient(circle at 78% 18%, rgba(212,150,10,.08), transparent 2.5%),
+    linear-gradient(180deg, #f8f4ee 0%, #f3ede3 100%);
+  color:var(--maroon-d);
+  overflow:hidden;
+}
+
+#journey::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 26% 28%, rgba(212,150,10,.12) 0 18px, transparent 19px),
+    radial-gradient(circle at 18% 10%, rgba(184,116,14,.95) 0 5px, transparent 6px),
+    radial-gradient(circle at 82% 74%, rgba(184,116,14,.12) 0 16px, transparent 17px);
+  opacity:.55;
+  pointer-events:none;
+}
+
+.journey-wrap {
+  position:relative;
+  z-index:1;
+  max-width:1120px;
+  margin:0 auto;
+}
+
+.journey-head {
+  max-width:620px;
+  margin:0 auto 88px;
+  text-align:center;
+}
+
+.journey-kicker {
+  font-size:10px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:20px;
+}
+
+.journey-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px, 8vw, 90px);
+  font-weight:900;
+  line-height:.92;
+  letter-spacing:-2px;
+  color:var(--maroon-d);
+  margin-bottom:28px;
+}
+
+.journey-title em {
+  display:block;
+  font-style:italic;
+  font-weight:400;
+  color:var(--amber-l);
+}
+
+.journey-sub {
+  font-size:16px;
+  line-height:1.9;
+  color:rgba(62,12,3,.62);
+}
+
+.journey-timeline {
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:44px;
+}
+
+.journey-timeline::before {
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:1px;
+  background:linear-gradient(180deg, rgba(212,150,10,.22), rgba(184,116,14,.5), rgba(212,150,10,.18));
+  transform:translateX(-50%);
+}
+
+.journey-step {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 120px minmax(0, 1fr);
+  align-items:start;
+  width:100%;
+}
+
+.journey-step.left {
+  text-align:right;
+}
+
+.journey-step.right {
+  text-align:left;
+}
+
+.journey-step.center {
+  max-width:760px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.journey-dot {
+  position:relative;
+  top:0;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:var(--maroon);
+  border:2px solid var(--amber-l);
+  box-shadow:0 14px 30px rgba(92,18,5,.14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Oswald',sans-serif;
+  font-size:18px;
+  letter-spacing:1px;
+  color:var(--amber-l);
+  justify-self:center;
+  z-index:1;
+}
+
+.journey-step.left .journey-dot {
+  grid-column:2;
+  grid-row:1 / span 3;
+}
+
+.journey-step.right .journey-dot {
+  grid-column:2;
+  grid-row:1 / span 3;
+}
+
+.journey-step.center .journey-dot {
+  grid-column:2;
+  margin-bottom:18px;
+}
+
+.journey-meta {
+  font-family:'Oswald',sans-serif;
+  font-size:11px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:12px;
+}
+
+.journey-step.left .journey-meta,
+.journey-step.left h3,
+.journey-step.left p {
+  grid-column:1;
+  max-width:430px;
+  justify-self:end;
+}
+
+.journey-step.right .journey-meta,
+.journey-step.right h3,
+.journey-step.right p {
+  grid-column:3;
+  max-width:430px;
+  justify-self:start;
+}
+
+.journey-step.center .journey-meta,
+.journey-step.center h3,
+.journey-step.center p {
+  grid-column:1 / span 3;
+  justify-self:center;
+  max-width:620px;
+}
+
+.journey-step h3 {
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:700;
+  line-height:1.15;
+  color:var(--maroon-d);
+  margin-bottom:14px;
+  text-wrap:balance;
+}
+
+.journey-step p {
+  font-size:15px;
+  line-height:1.9;
+  color:rgba(62,12,3,.62);
+  text-wrap:pretty;
+}
 
 /* ══════════════════════════════
    REVIEWS — DARK LUXURY
@@ -896,15 +1434,55 @@ footer {
   .sig-card:nth-child(even) .sc-text, .sig-card:nth-child(even) .sc-img { order:unset; }
   .sc-img { min-height:360px; padding:20px; }
   .sc-text { padding:44px 28px; }
+  #beliefs { padding:80px 28px; }
+  .beliefs-grid { grid-template-columns:1fr 1fr; }
   #more-menu { padding:80px 28px; }
   .more-header, .menu-group-head, .menu-note { flex-direction:column; align-items:flex-start; }
   .menu-grid { grid-template-columns:1fr 1fr; }
   #philosophy { grid-template-columns:1fr; }
   .phil-light { min-height:380px; }
-  .phil-dark { padding:80px 28px; }
+  .phil-dark { padding:64px 28px 52px; }
   #process { padding:80px 28px; }
   .timeline { flex-direction:column; gap:32px; }
   .timeline::before { display:none; }
+  #preorder-drop, #mystery-drop { padding:80px 28px; }
+  .preorder-countdown { grid-template-columns:repeat(2, minmax(140px, 1fr)); gap:18px; }
+  .count-card::after { display:none; }
+  .mystery-wrap { grid-template-columns:1fr; gap:46px; }
+  #journey { padding:90px 28px 80px; }
+  .journey-head { margin-bottom:60px; }
+  .journey-timeline { gap:34px; }
+  .journey-timeline::before { left:26px; transform:none; }
+  .journey-step,
+  .journey-step.left,
+  .journey-step.right,
+  .journey-step.center {
+    grid-template-columns:52px minmax(0, 1fr);
+    max-width:none;
+    margin:0;
+    text-align:left;
+  }
+  .journey-step.left .journey-dot,
+  .journey-step.right .journey-dot,
+  .journey-step.center .journey-dot {
+    grid-column:1;
+    grid-row:1 / span 3;
+    justify-self:start;
+    margin-bottom:0;
+  }
+  .journey-step.left .journey-meta,
+  .journey-step.left h3,
+  .journey-step.left p,
+  .journey-step.right .journey-meta,
+  .journey-step.right h3,
+  .journey-step.right p,
+  .journey-step.center .journey-meta,
+  .journey-step.center h3,
+  .journey-step.center p {
+    grid-column:2;
+    justify-self:start;
+    max-width:none;
+  }
   #reviews { padding:80px 28px; }
   .reviews-grid { grid-template-columns:1fr; }
   #cta .cta-content { padding:80px 28px; }
@@ -918,9 +1496,18 @@ footer {
   .hero-h1 { font-size:clamp(48px,12vw,80px); }
   .menu-group { padding:24px 18px; }
   .menu-grid { grid-template-columns:1fr; }
-  .phil-pillars { grid-template-columns:1fr; }
+  .beliefs-grid { grid-template-columns:1fr; }
+  .belief-card { border-right:none; border-bottom:1px solid rgba(184,116,14,.12); }
+  .belief-card:last-child { border-bottom:none; }
   .footer-grid { grid-template-columns:1fr; }
   .hero-stats { display:none; }
+  .drop-actions { flex-direction:column; align-items:stretch; }
+  .drop-actions a { text-align:center; }
+  .preorder-countdown { grid-template-columns:1fr 1fr; }
+  .mystery-title, .drop-title { letter-spacing:-1px; }
+  .mystery-highlight { padding:26px 22px; }
+  .mystery-mark span { font-size:112px; }
+  .journey-title { letter-spacing:-1px; }
 }
 </style>
 </head>
@@ -1116,12 +1703,42 @@ footer {
   </div>
 </section>
 
+<!-- ══ BELIEFS ══ -->
+<section id="beliefs">
+  <div class="beliefs-head">
+    <div class="s-eyebrow reveal" style="justify-content:center;">Our Promise To You</div>
+    <h2 class="s-title reveal">Built on Four<br><em>Beliefs.</em></h2>
+  </div>
+  <div class="beliefs-grid">
+    <article class="belief-card reveal">
+      <div class="belief-mark">Always</div>
+      <h3>Halal Always</h3>
+      <p>Everything on our menu is made with certified halal ingredients. No exceptions. No compromise. Every time.</p>
+    </article>
+    <article class="belief-card reveal rd1">
+      <div class="belief-mark">Fresh</div>
+      <h3>Small-Batch Freshness</h3>
+      <p>Our food is limited, handmade, and special. We never mass-produce. Each drop is carefully crafted in small batches for maximum quality.</p>
+    </article>
+    <article class="belief-card reveal rd2">
+      <div class="belief-mark">Craft</div>
+      <h3>Chef-Crafted Creativity</h3>
+      <p>Each item is personally designed, tested and made by Shams. If it's not good enough for us, it doesn't go on your plate.</p>
+    </article>
+    <article class="belief-card reveal rd3">
+      <div class="belief-mark">People</div>
+      <h3>Community Connection</h3>
+      <p>Sandwich Philosophy is made for Adelaide, but shared with everyone who loves food and story. You're not just a customer, you're family.</p>
+    </article>
+  </div>
+</section>
+
 <!-- ══ MORE MENU ══ -->
 <section id="more-menu">
   <div class="more-header reveal">
     <div>
-      <div class="s-eyebrow">Expanded Menu</div>
-      <h2 class="s-title">The Full<br><em>Philosophy</em></h2>
+      <div class="s-eyebrow">The Full Menu</div>
+      <h2 class="s-title">Every <em>Philosophy.</em></h2>
     </div>
     <a href="#cta" class="more-link">Preorder The Weekend Drop →</a>
   </div>
@@ -1131,9 +1748,9 @@ footer {
       <div class="menu-group-head">
         <div>
           <div class="menu-group-kicker">Core Beliefs</div>
-          <h3 class="menu-group-title">Burgers &amp; Sandwiches</h3>
+          <h3 class="menu-group-title">Every Philosophy</h3>
         </div>
-        <p class="menu-group-copy">The central theories of the menu: indulgent, playful, and built to feel like the main event.</p>
+        <p class="menu-group-copy">Everything that defines the house style in one place: burgers, melts, wraps, and street favourites built with the same deliberate energy.</p>
       </div>
       <div class="menu-grid">
         <article class="menu-card">
@@ -1178,18 +1795,6 @@ footer {
             <p class="menu-card-desc">A stripped-back smash burger with molten cheese, pickles, lettuce, tomato, and sauce. All the satisfaction of the house style in a cleaner, punchier build.</p>
           </div>
         </article>
-      </div>
-    </div>
-
-    <div class="menu-group reveal rd1">
-      <div class="menu-group-head">
-        <div>
-          <div class="menu-group-kicker">Wrapped Arguments</div>
-          <h3 class="menu-group-title">Wraps &amp; Street Favourites</h3>
-        </div>
-        <p class="menu-group-copy">The part of the menu that brings movement, heat, and plenty of personality, from Lebanese bread to homemade Egyptian bread.</p>
-      </div>
-      <div class="menu-grid">
         <article class="menu-card">
           <div class="menu-card-media"><img src="images/shawarma.png" alt="Golden Manuscript"></div>
           <div class="menu-card-body">
@@ -1238,8 +1843,8 @@ footer {
     <div class="menu-group reveal rd2">
       <div class="menu-group-head">
         <div>
-          <div class="menu-group-kicker">Sweet Conclusions</div>
-          <h3 class="menu-group-title">Desserts</h3>
+          <div class="menu-group-kicker">Sweet Conclusion</div>
+          <h3 class="menu-group-title">Sweet Conclusion</h3>
         </div>
         <p class="menu-group-copy">Fresh-baked finishes for the weekend drop: warm, nostalgic, and just indulgent enough to feel like a reward.</p>
       </div>
@@ -1289,14 +1894,6 @@ footer {
       </div>
     </div>
 
-    <div class="menu-note reveal rd3">
-      <div>
-        <div class="menu-note-kicker">Friday Reveal</div>
-        <h3>The Thinkin' Chicken</h3>
-        <p>Every Friday, Shams drops a limited mystery sandwich with no repeats and no guarantees beyond big flavour. It is the most experimental part of the menu, and it only lasts until sold out.</p>
-      </div>
-      <div class="menu-note-tag">Limited Drop</div>
-    </div>
   </div>
   <div class="mosaic">
     <div class="mc reveal">
@@ -1365,12 +1962,6 @@ footer {
     <h2 class="s-title">No Sandwich<br>Has <em>Small<br>Decisions.</em></h2>
     <p>We started Sandwich Philosophy in 2024 with one belief: the sandwich deserves the same serious attention that any great restaurant gives to any great dish. Every element — the bread, the sauce, the sequence of the layers — matters.</p>
     <p>We source locally because it tastes better, not because it's trendy. We make things by hand because shortcuts show. And we name our sandwiches after ideas, because great food should make you feel something beyond just full.</p>
-    <div class="phil-pillars">
-      <div class="pillar"><div class="pi">🌾</div><h4>Local First</h4><p>SA farms and bakeries, collected before 6am. If it's not fresh, it's not on the menu.</p></div>
-      <div class="pillar"><div class="pi">⚖️</div><h4>Every Layer</h4><p>Ratios are tested. Sequences are deliberate. Nothing is there by accident.</p></div>
-      <div class="pillar"><div class="pi">🔥</div><h4>Made by Hand</h4><p>Sauces, pickles, brines — all housemade. No shortcuts in our kitchen.</p></div>
-      <div class="pillar"><div class="pi">🧠</div><h4>Named With Intent</h4><p>Every sandwich has a philosophy. We take the naming as seriously as the build.</p></div>
-    </div>
   </div>
   <div class="phil-light">
     <div class="phil-light-img">
@@ -1415,6 +2006,104 @@ footer {
       <div class="tl-line"></div>
       <h3 class="tl-h">The Philosophy</h3>
       <p class="tl-p">You receive something made with genuine care and serious thought. Not assembled. Not mass-produced. Crafted — and named for the idea it represents.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PREORDER DROP ══ -->
+<section id="preorder-drop">
+  <div class="preorder-wrap">
+    <div class="drop-kicker reveal">Limited Weekend Drop - Adelaide SA</div>
+    <h2 class="drop-title reveal">Preorder This <em>Weekend's Drop.</em></h2>
+    <p class="drop-copy reveal rd1">Limited quantities. Handmade fresh. Available Friday-Sunday until sold out. Order early - they disappear fast.</p>
+    <div class="drop-actions reveal rd2">
+      <a href="tel:+61416944799" class="btn-amber"><span>Call To Preorder: +61 416 944 799</span></a>
+      <a href="#social" class="btn-ghost">Message Us</a>
+    </div>
+    <div class="drop-divider reveal rd2"></div>
+    <div class="preorder-countdown reveal rd3" aria-label="Countdown to next Friday midday preorder window">
+      <div class="count-card">
+        <span class="count-value" data-countdown="days">00</span>
+        <span class="count-label">Days</span>
+      </div>
+      <div class="count-card">
+        <span class="count-value" data-countdown="hours">00</span>
+        <span class="count-label">Hours</span>
+      </div>
+      <div class="count-card">
+        <span class="count-value" data-countdown="minutes">00</span>
+        <span class="count-label">Minutes</span>
+      </div>
+      <div class="count-card">
+        <span class="count-value" data-countdown="seconds">00</span>
+        <span class="count-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MYSTERY DROP ══ -->
+<section id="mystery-drop">
+  <div class="mystery-wrap">
+    <div class="mystery-copy">
+      <div class="mystery-kicker reveal">Every Friday</div>
+      <h2 class="mystery-title reveal">The Mystery <em>Sandwich.</em></h2>
+      <p class="mystery-text reveal rd1">Every Friday we unveil something entirely new. No rules. No expectations. Available once, never repeated. It could be anything - a new flavor fusion, a reimagined classic, or something we've never even tried before.</p>
+      <p class="mystery-text reveal rd2">The only way to understand it is to taste it. Follow us on Instagram to catch the Friday reveal before it sells out.</p>
+      <div class="mystery-highlight reveal rd3">
+        <div class="mystery-highlight-kicker">This Friday's Drop</div>
+        <h3>The Thinkin' Chicken - Mystery Edition</h3>
+        <p>Revealed every Friday at 12pm on Instagram. Preorder opens Thursday night.</p>
+      </div>
+      <div class="drop-actions reveal rd4">
+        <a href="#social" class="btn-amber"><span>Follow For Friday Reveals</span></a>
+        <a href="#cta" class="btn-ghost">Get Notified</a>
+      </div>
+    </div>
+    <div class="mystery-orbit reveal-right">
+      <div class="mystery-ring-copy">Friday Only</div>
+      <div class="mystery-mark"><span>?</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ JOURNEY ══ -->
+<section id="journey">
+  <div class="journey-wrap">
+    <div class="journey-head">
+      <div class="journey-kicker reveal">The Journey</div>
+      <h2 class="journey-title reveal">From Dorm Rooms <em>to Dreams.</em></h2>
+      <p class="journey-sub reveal rd1">A designer who discovered cooking. A traveler who found his calling. A dreamer who built a brand. This is how Sandwich Philosophy came to life.</p>
+    </div>
+
+    <div class="journey-timeline">
+      <article class="journey-step left reveal">
+        <div class="journey-dot">01</div>
+        <div class="journey-meta">Early 20s</div>
+        <h3>The Dorm Room Spark</h3>
+        <p>Eating out every day became exhausting. One phone call to mom changed everything. I discovered that cooking wasn't just about filling a plate. It was about filling myself with joy.</p>
+      </article>
+
+      <article class="journey-step right reveal rd1">
+        <div class="journey-dot">02</div>
+        <div class="journey-meta">Design School</div>
+        <h3>Design Meets Flavor</h3>
+        <p>As a graphic designer obsessed with details, fonts, spacing, color, I realized cooking was the same. Bread became canvas. Sauces became brushstrokes. Both demanded precision. Both rewarded creativity.</p>
+      </article>
+
+      <article class="journey-step left reveal rd2">
+        <div class="journey-dot">03</div>
+        <div class="journey-meta">2020</div>
+        <h3>The Oman Chapter</h3>
+        <p>Life took me to Oman where I started my first food business. Simple, focused on sandwiches, but it ignited a fire. I discovered I wasn't just into sandwiches; I was passionate about everything: dough, buns, sauces, meat, cheese.</p>
+      </article>
+
+      <article class="journey-step right reveal rd3">
+        <div class="journey-dot">04</div>
+        <div class="journey-meta">2024</div>
+        <h3>Sandwich Philosophy is Born</h3>
+        <p>Back in Adelaide, it was time to give the passion a proper name. Sandwich Philosophy was born, not just about sandwiches, but about ideas, moods, and experiments. Each creation became a philosophy.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -1670,6 +2359,39 @@ const statsObs = new IntersectionObserver(entries => {
 }, { threshold:.5 });
 const philStats = document.querySelector('.phil-stats');
 if (philStats) statsObs.observe(philStats);
+
+/* —— PREORDER COUNTDOWN —— */
+function getNextFridayNoon() {
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(12, 0, 0, 0);
+  const daysUntilFriday = (5 - target.getDay() + 7) % 7;
+  target.setDate(target.getDate() + daysUntilFriday);
+  if (daysUntilFriday === 0 && now >= target) {
+    target.setDate(target.getDate() + 7);
+  }
+  return target;
+}
+
+function updatePreorderCountdown() {
+  const target = getNextFridayNoon();
+  const now = new Date();
+  const diff = Math.max(0, target - now);
+
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  const values = { days, hours, minutes, seconds };
+  document.querySelectorAll('[data-countdown]').forEach(el => {
+    const key = el.getAttribute('data-countdown');
+    el.textContent = String(values[key]).padStart(2, '0');
+  });
+}
+
+updatePreorderCountdown();
+setInterval(updatePreorderCountdown, 1000);
 </script>
 </body>
 </html>
