@@ -36,14 +36,9 @@ body {
   color: var(--stone);
   font-family: 'Lato', sans-serif;
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
 }
 
-/* ── CUSTOM CURSOR ── */
-#cur { position:fixed; width:12px; height:12px; background:var(--amber); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .25s,height .25s,background .25s; mix-blend-mode:normal; }
-#cur-ring { position:fixed; width:40px; height:40px; border:1.5px solid rgba(184,116,14,.55); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .4s,height .4s,opacity .3s; }
-.hov #cur { width:20px; height:20px; background:var(--amber-l); }
-.hov #cur-ring { width:60px; height:60px; opacity:1; border-color:rgba(184,116,14,.8); }
 
 /* ── GRAIN TEXTURE ── */
 body::before {
@@ -502,159 +497,210 @@ nav.scrolled {
     linear-gradient(180deg, rgba(240,236,229,.02) 0%, transparent 40%);
 }
 
+/* ══════════════════════════════
+   MENU CAROUSEL SYSTEM
+══════════════════════════════ */
 .more-header { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:20px; position:relative; z-index:2; }
-.more-copy {
-  max-width:620px;
-  margin-bottom:56px;
-  font-size:15px; line-height:1.85; font-weight:300;
-  color:rgba(240,236,229,.58);
-  position:relative; z-index:2;
-}
+.more-copy { max-width:620px; margin-bottom:40px; font-size:15px; line-height:1.85; font-weight:300; color:rgba(240,236,229,.58); position:relative; z-index:2; }
 .more-link { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(184,116,14,.35); padding-bottom:2px; transition:color .3s; white-space:nowrap; }
 .more-link:hover { color:var(--amber-ll); }
-.mosaic, .mc { display:none; }
+.mosaic, .mc, .menu-groups, .menu-group, .menu-grid, .menu-card { display:none; }
+.menu-note { display:none; }
 
-.menu-groups {
-  display:flex; flex-direction:column; gap:34px;
+/* ── FILTER TABS ── */
+.menu-tabs {
+  display:flex; gap:0; margin-bottom:44px;
+  border-bottom:1px solid rgba(184,116,14,.12);
   position:relative; z-index:2;
+  overflow-x:auto; scrollbar-width:none;
+  flex-wrap:nowrap;
 }
-.menu-group {
-  border:1px solid rgba(184,116,14,.15);
-  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(26,8,4,.18) 18%, rgba(26,8,4,.3) 100%);
-  padding:32px;
+.menu-tabs::-webkit-scrollbar { display:none; }
+.menu-tab {
+  font-family:'Oswald',sans-serif; font-size:11px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase;
+  color:rgba(240,236,229,.38); background:none; border:none;
+  padding:13px 26px; cursor:pointer; white-space:nowrap;
+  border-bottom:2px solid transparent; margin-bottom:-1px;
+  transition:color .3s;
+}
+.menu-tab.active { color:var(--amber-ll); border-color:var(--amber); }
+.menu-tab:hover { color:rgba(240,236,229,.7); }
+
+/* ── CAROUSEL SHELL ── */
+.menu-carousel-wrap {
   position:relative; overflow:hidden;
-  backdrop-filter:blur(10px);
-  box-shadow:0 24px 60px rgba(0,0,0,.12);
+  margin:0 -60px;
 }
-.menu-group::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg, transparent, rgba(184,116,14,.75), transparent);
+.menu-carousel-wrap::before,
+.menu-carousel-wrap::after {
+  content:''; position:absolute; top:0; bottom:0; width:100px; z-index:3; pointer-events:none;
 }
-.menu-group::after {
-  content:''; position:absolute; inset:auto -10% -30% auto; width:280px; height:280px;
-  background:radial-gradient(circle, rgba(184,116,14,.07), transparent 65%);
+.menu-carousel-wrap::before { left:0;  background:linear-gradient(to right, var(--maroon-d) 20%, transparent); }
+.menu-carousel-wrap::after  { right:0; background:linear-gradient(to left,  var(--maroon-d) 20%, transparent); }
+
+.menu-carousel {
+  display:flex; gap:22px;
+  padding:6px 100px 28px;
+  overflow-x:auto; scroll-behavior:smooth;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  user-select:none;
+}
+.menu-carousel:active { cursor:grabbing; }
+.menu-carousel::-webkit-scrollbar { display:none; }
+
+/* ── CAROUSEL CARD ── */
+.cr-card {
+  flex:0 0 290px; width:290px;
+  background:rgba(12,4,2,.92);
+  border:1px solid rgba(184,116,14,.1);
+  position:relative; overflow:hidden;
+  transition:border-color .4s, box-shadow .4s, transform .4s cubic-bezier(.22,1,.36,1);
+  cursor:pointer;
+  display:flex; flex-direction:column;
+}
+.cr-card:hover {
+  border-color:rgba(184,116,14,.45);
+  box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(184,116,14,.15);
+  transform:translateY(-8px);
+}
+.cr-card:hover .cr-img img { transform:scale(1.08); filter:brightness(1) saturate(1.2); }
+.cr-card:hover .cr-order { opacity:1; transform:translateY(0); }
+
+/* Amber bottom bar animation */
+.cr-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--amber), var(--amber-l));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.cr-card:hover::after { transform:scaleX(1); }
+
+/* Image */
+.cr-img {
+  width:100%; height:210px; overflow:hidden; position:relative; flex-shrink:0;
+  background:linear-gradient(135deg, rgba(92,18,5,.5), rgba(26,8,4,.9));
+}
+.cr-img img {
+  width:100%; height:100%; object-fit:cover; object-position:center top;
+  transition:transform .7s cubic-bezier(.22,1,.36,1), filter .4s;
+  filter:brightness(.8) saturate(1.05);
   pointer-events:none;
 }
-.menu-group:nth-child(2)::after { background:radial-gradient(circle, rgba(240,236,229,.05), transparent 65%); }
-.menu-group:nth-child(3)::after { background:radial-gradient(circle, rgba(212,150,10,.09), transparent 65%); }
-.menu-group-head {
-  display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
-  margin-bottom:24px; padding-bottom:20px;
-  border-bottom:1px solid rgba(184,116,14,.12);
+.cr-img::after {
+  content:''; position:absolute; inset:auto 0 0 0; height:60%;
+  background:linear-gradient(to top, rgba(12,4,2,.95), transparent);
+  pointer-events:none;
 }
-.menu-group-kicker {
-  font-size:10px; letter-spacing:5px; text-transform:uppercase;
-  color:rgba(212,150,10,.8); margin-bottom:8px;
+.cr-price {
+  position:absolute; bottom:14px; right:15px; z-index:2;
+  font-family:'Playfair Display',serif; font-size:26px; font-weight:700;
+  color:var(--amber-l); line-height:1;
+  text-shadow:0 2px 10px rgba(0,0,0,.9);
 }
-.menu-group-title {
-  font-family:'Playfair Display',serif;
-  font-size:34px; font-weight:700; line-height:1;
-  color:var(--stone);
+.cr-pill {
+  position:absolute; top:12px; left:12px; z-index:2;
+  font-family:'Oswald',sans-serif; font-size:9px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:4px 12px;
+  clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);
 }
-.menu-group-copy {
-  max-width:440px;
-  font-size:13px; line-height:1.8;
-  color:rgba(240,236,229,.45);
-}
+.cr-pill.amber { background:var(--amber); color:var(--maroon-d); }
+.cr-pill.dark  { background:rgba(26,8,4,.85); color:var(--amber-ll); border:1px solid rgba(184,116,14,.4); }
 
-.menu-grid {
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:22px;
+.cr-body { padding:18px 20px 22px; flex:1; display:flex; flex-direction:column; }
+.cr-kicker { font-size:9px; letter-spacing:5px; text-transform:uppercase; color:rgba(184,116,14,.65); margin-bottom:8px; }
+.cr-name { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--stone); line-height:1.1; margin-bottom:4px; }
+.cr-aka  { font-size:11px; font-style:italic; color:rgba(240,236,229,.32); margin-bottom:10px; }
+.cr-desc { font-size:12px; line-height:1.68; color:rgba(240,236,229,.48); font-weight:300; flex:1; }
+.cr-order {
+  margin-top:14px; display:inline-flex; align-items:center; gap:8px;
+  font-family:'Oswald',sans-serif; font-size:9px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--amber); border:1px solid rgba(184,116,14,.3);
+  padding:9px 16px; text-decoration:none;
+  width:fit-content; position:relative; overflow:hidden;
+  opacity:0; transform:translateY(6px);
+  transition:opacity .35s, transform .35s;
 }
-.menu-card {
-  background:rgba(14,5,3,.88);
-  border:1px solid rgba(184,116,14,.12);
-  overflow:hidden;
-  position:relative;
-  transition:transform .35s, border-color .35s, box-shadow .35s, background .35s;
+.cr-order::before {
+  content:''; position:absolute; inset:0; background:var(--amber);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
 }
-.menu-card:hover {
-  transform:translateY(-6px);
-  border-color:rgba(184,116,14,.35);
-  box-shadow:0 22px 50px rgba(0,0,0,.22);
-  background:rgba(20,7,4,.96);
+.cr-order span { position:relative; z-index:1; transition:color .4s; }
+.cr-order:hover::before { transform:scaleX(1); }
+.cr-order:hover span { color:var(--maroon-d); }
+
+/* ── CAROUSEL BOTTOM NAV ── */
+.carousel-nav {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:28px; padding:0 0; position:relative; z-index:2;
 }
-.menu-card::after {
-  content:''; position:absolute; left:18px; right:18px; bottom:0; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(184,116,14,.5), transparent);
-  opacity:.45;
-}
-.menu-card-media {
-  aspect-ratio:5 / 4;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at top, rgba(184,116,14,.16), transparent 58%),
-    linear-gradient(180deg, rgba(184,116,14,.18), rgba(62,12,3,.35));
+.carousel-arrows { display:flex; gap:10px; }
+.c-arrow {
+  width:48px; height:48px; border-radius:50%;
+  background:rgba(184,116,14,.08); border:1px solid rgba(184,116,14,.22);
   display:flex; align-items:center; justify-content:center;
-  padding:16px;
+  cursor:pointer; transition:background .3s, border-color .3s, transform .25s;
+  color:var(--amber); font-size:18px; flex-shrink:0;
 }
-.menu-card-media img {
-  width:100%; height:100%;
-  object-fit:cover; object-position:center;
-  display:block;
-  transition:transform .6s ease, filter .4s ease;
-  filter:saturate(1.03);
+.c-arrow:hover { background:var(--amber); border-color:var(--amber); color:var(--maroon-d); transform:scale(1.08); }
+.c-arrow:disabled, .c-arrow.disabled { opacity:.25; pointer-events:none; }
+
+.carousel-dots { display:flex; gap:8px; align-items:center; }
+.c-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:rgba(184,116,14,.22); border:none; padding:0; cursor:pointer;
+  transition:background .3s, width .35s cubic-bezier(.22,1,.36,1), border-radius .35s;
 }
-.menu-card:hover .menu-card-media img {
-  transform:scale(1.03);
-  filter:saturate(1.1);
+.c-dot.active { background:var(--amber); width:24px; border-radius:3px; }
+
+/* ── DESSERT SHOWCASE ── */
+.dessert-showcase {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:0; background:rgba(184,116,14,.08);
+  position:relative; overflow:hidden;
+  margin-top:0;
 }
-.menu-card-body { padding:22px 22px 24px; position:relative; }
-.menu-card-body::before {
-  content:''; position:absolute; left:22px; right:22px; top:0; height:1px;
-  background:linear-gradient(90deg, rgba(240,236,229,.02), rgba(184,116,14,.22), rgba(240,236,229,.02));
+.dessert-showcase::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--amber), transparent);
 }
-.menu-card-top {
-  display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
-  margin-bottom:8px;
-}
-.menu-card-kicker {
-  font-size:10px; letter-spacing:4px; text-transform:uppercase;
-  color:rgba(212,150,10,.78); margin-bottom:8px;
-}
-.menu-card-name {
-  font-family:'Playfair Display',serif;
-  font-size:27px; font-weight:700; line-height:1.05;
-  color:var(--stone);
-}
-.menu-card-aka {
-  font-size:11px; font-style:italic;
-  color:rgba(240,236,229,.38); margin-bottom:12px;
-}
-.menu-card-desc {
-  font-size:13px; line-height:1.75; font-weight:300;
-  color:rgba(240,236,229,.56);
-}
-.menu-card-price {
-  font-family:'Playfair Display',serif;
-  font-size:28px; font-weight:700; line-height:1;
-  color:var(--amber-l);
-  flex-shrink:0;
-}
-.menu-note {
-  margin-top:28px;
-  padding:22px 24px;
-  border:1px solid rgba(184,116,14,.18);
-  background:
-    linear-gradient(135deg, rgba(184,116,14,.08), rgba(62,12,3,.14)),
-    rgba(184,116,14,.06);
-  display:flex; justify-content:space-between; gap:24px; align-items:center;
-  box-shadow:0 18px 40px rgba(0,0,0,.12);
-}
-.menu-note-kicker {
-  font-size:10px; letter-spacing:5px; text-transform:uppercase;
-  color:rgba(212,150,10,.85); margin-bottom:8px;
-}
-.menu-note h3 {
-  font-family:'Playfair Display',serif;
-  font-size:30px; font-weight:700; color:var(--stone); margin-bottom:6px;
-}
-.menu-note p {
-  max-width:680px;
-  font-size:13px; line-height:1.8; font-weight:300;
-  color:rgba(240,236,229,.56);
-}
+.d-card { position:relative; overflow:hidden; cursor:pointer; border-right:1px solid rgba(184,116,14,.1); transition:background .4s; display:flex; flex-direction:column; }
+.d-card:last-child { border-right:none; }
+.d-card:hover { background:rgba(92,18,5,.25); }
+.d-card:hover .d-img img { transform:scale(1.08); filter:brightness(1) saturate(1.2); }
+.d-card:hover .d-order { opacity:1; transform:translateY(0); }
+.d-img { width:100%; aspect-ratio:1/1; overflow:hidden; position:relative; background:linear-gradient(135deg,rgba(92,18,5,.5),rgba(26,8,4,.9)); }
+.d-img img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .7s cubic-bezier(.22,1,.36,1), filter .4s; filter:brightness(.8) saturate(1.1); }
+.d-img::after { content:''; position:absolute; inset:auto 0 0 0; height:50%; background:linear-gradient(to top, rgba(26,8,4,.9), transparent); }
+.d-price-badge { position:absolute; bottom:16px; right:16px; z-index:2; font-family:'Playfair Display',serif; font-size:28px; font-weight:700; color:var(--amber-l); text-shadow:0 2px 12px rgba(0,0,0,.8); }
+.d-body { padding:24px 26px 28px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.d-kicker { font-size:9px; letter-spacing:6px; text-transform:uppercase; color:rgba(184,116,14,.65); }
+.d-name { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--stone); line-height:1.1; }
+.d-aka { font-size:12px; font-style:italic; color:rgba(240,236,229,.35); }
+.d-desc { font-size:13px; line-height:1.72; color:rgba(240,236,229,.5); font-weight:300; margin-top:4px; flex:1; }
+.d-order { display:inline-flex; align-items:center; gap:8px; margin-top:16px; font-family:'Oswald',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); text-decoration:none; border:1px solid rgba(184,116,14,.3); padding:10px 18px; width:fit-content; position:relative; overflow:hidden; opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s; }
+.d-order::before { content:''; position:absolute; inset:0; background:var(--amber); transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.22,1,.36,1); }
+.d-order span { position:relative; z-index:1; transition:color .4s; }
+.d-order:hover::before { transform:scaleX(1); }
+.d-order:hover span { color:var(--maroon-d); }
+
+/* ── DESSERT GROUP WRAPPER ── */
+.menu-groups { display:flex; flex-direction:column; gap:0; position:relative; z-index:2; }
+.menu-group { position:relative; }
+.menu-group-head { display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid rgba(184,116,14,.15); }
+.menu-group-kicker { font-size:9px; letter-spacing:7px; text-transform:uppercase; color:var(--amber); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.menu-group-kicker::before { content:''; width:22px; height:1.5px; background:var(--amber); }
+.menu-group-title { font-family:'Playfair Display',serif; font-size:clamp(36px,4vw,54px); font-weight:900; line-height:.95; letter-spacing:-1px; color:var(--stone); }
+.menu-group-title em { font-style:italic; color:var(--amber-l); }
+.menu-group-copy { max-width:380px; font-size:13px; line-height:1.8; color:rgba(240,236,229,.42); font-weight:300; }
+
+/* ── MENU NOTE STUB ── */
+.menu-note-kicker { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:rgba(212,150,10,.85); margin-bottom:8px; }
 .menu-note-tag {
   font-family:'Oswald',sans-serif;
   font-size:11px; letter-spacing:3px; text-transform:uppercase;
@@ -1438,7 +1484,10 @@ footer {
   .beliefs-grid { grid-template-columns:1fr 1fr; }
   #more-menu { padding:80px 28px; }
   .more-header, .menu-group-head, .menu-note { flex-direction:column; align-items:flex-start; }
-  .menu-grid { grid-template-columns:1fr 1fr; }
+  .menu-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .menu-card:nth-child(1),.menu-card:nth-child(2),.menu-card:nth-child(3),.menu-card:nth-child(4),.menu-card:nth-child(5),.menu-card:nth-child(6) { grid-column:span 1; grid-row:span 1; flex-direction:column; }
+  .menu-card:nth-child(2) .menu-card-media,.menu-card:nth-child(3) .menu-card-media { width:100%; height:200px; min-width:unset; }
+  .dessert-showcase { grid-template-columns:1fr; }
   #philosophy { grid-template-columns:1fr; }
   .phil-light { min-height:380px; }
   .phil-dark { padding:64px 28px 52px; }
@@ -1496,6 +1545,7 @@ footer {
   .hero-h1 { font-size:clamp(48px,12vw,80px); }
   .menu-group { padding:24px 18px; }
   .menu-grid { grid-template-columns:1fr; }
+  .dessert-showcase { grid-template-columns:1fr; }
   .beliefs-grid { grid-template-columns:1fr; }
   .belief-card { border-right:none; border-bottom:1px solid rgba(184,116,14,.12); }
   .belief-card:last-child { border-bottom:none; }
@@ -1513,8 +1563,6 @@ footer {
 </head>
 <body>
 
-<div id="cur"></div>
-<div id="cur-ring"></div>
 
 <!-- ══ LOADER ══ -->
 <div id="loader">
@@ -1743,216 +1791,208 @@ footer {
     <a href="#cta" class="more-link">Preorder The Weekend Drop →</a>
   </div>
   <p class="more-copy reveal rd1">Our menu changes weekly, but the philosophies stay the same. Every burger has a point of view, every wrap brings its own argument, and every dessert closes the conversation with something memorable.</p>
-  <div class="menu-groups">
+
+  <!-- ── FILTER TABS ── -->
+  <div class="menu-tabs reveal">
+    <button class="menu-tab active" data-filter="all">All Items</button>
+    <button class="menu-tab" data-filter="burger">Burgers</button>
+    <button class="menu-tab" data-filter="wrap">Wraps</button>
+    <button class="menu-tab" data-filter="chicken">Chicken</button>
+    <button class="menu-tab" data-filter="veg">Vegetarian</button>
+  </div>
+
+  <!-- ── CAROUSEL ── -->
+  <div class="menu-carousel-wrap reveal">
+    <div class="menu-carousel" id="menuCarousel">
+
+      <div class="cr-card" data-cat="burger">
+        <div class="cr-img">
+          <div class="cr-pill amber">Most Ordered</div>
+          <img src="images/double-animal-burger.png" alt="The Overthinker">
+          <div class="cr-price">$19</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Double Beef · Signature</div>
+          <div class="cr-name">The Overthinker</div>
+          <div class="cr-aka">AKA Double Animal Burger</div>
+          <p class="cr-desc">Two smash patties animal style wrestling under molten cheese, tangled in pickles, lettuce, tomato, and animal sauce. For those who can't choose.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="burger">
+        <div class="cr-img">
+          <div class="cr-pill dark">Weekend Special</div>
+          <img src="images/existential-onion.png" alt="The Existential Onion">
+          <div class="cr-price">$15</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Oklahoma Smash · Signature</div>
+          <div class="cr-name">The Existential Onion</div>
+          <div class="cr-aka">AKA Oklahoma Onion Burger</div>
+          <p class="cr-desc">A smash burger crowned with caramelised onions, dripping with flavor, guaranteed to make you rethink your choices — in the best way.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="burger">
+        <div class="cr-img">
+          <img src="images/onion-burger.png" alt="The Thinker">
+          <div class="cr-price">$15</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Classic Smash</div>
+          <div class="cr-name">The Thinker</div>
+          <div class="cr-aka">AKA Smash Burger</div>
+          <p class="cr-desc">One patty. Molten cheese. Pickles, lettuce, tomato, sauce. The cleanest, most deliberate argument on the menu.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="burger">
+        <div class="cr-img">
+          <div class="cr-pill amber">Fan Favourite</div>
+          <img src="images/patty-melt.png" alt="The Meltdown">
+          <div class="cr-price">$18</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Patty Melt</div>
+          <div class="cr-name">The Meltdown</div>
+          <div class="cr-aka">AKA The Patty Melt</div>
+          <p class="cr-desc">Smash-grilled beef tucked between golden buttery toast, tangled with molten cheese and caramelised onions. Not a burger, not a toastie — the lovechild of both.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="chicken">
+        <div class="cr-img">
+          <div class="cr-pill dark">Signature</div>
+          <img src="images/lean-logic.png" alt="Lean Logic">
+          <div class="cr-price">$17</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Grilled Chicken · Balanced</div>
+          <div class="cr-name">Lean Logic</div>
+          <div class="cr-aka">AKA Grilled Chicken Sandwich</div>
+          <p class="cr-desc">Herb-grilled chicken, house slaw, Swiss cheese, garlic sauce. Clean ingredients, perfectly balanced. Proof that less really can be more.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="chicken">
+        <div class="cr-img">
+          <img src="images/fried-chicken-sandwich.png" alt="False Premise">
+          <div class="cr-price">$18</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Crispy Chicken</div>
+          <div class="cr-name">False Premise</div>
+          <div class="cr-aka">AKA Fried Chicken Sandwich</div>
+          <p class="cr-desc">Buttermilk fried chicken, hot honey, jalapeño, dill pickles, ranch. You thought it was the sensible choice. The premise was false.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="wrap">
+        <div class="cr-img">
+          <div class="cr-pill amber">Street Classic</div>
+          <img src="images/shawarma.png" alt="Golden Manuscript">
+          <div class="cr-price">$18</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Wrap · Middle Eastern</div>
+          <div class="cr-name">Golden Manuscript</div>
+          <div class="cr-aka">AKA Chicken Shawarma</div>
+          <p class="cr-desc">Marinated chicken shaved fresh, wrapped in Lebanese bread with garlic sauce, tomato, pickles, and fries inside. A street classic — rewritten.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="veg wrap">
+        <div class="cr-img">
+          <div class="cr-pill dark">Vegetarian</div>
+          <img src="images/falafel.png" alt="Falafel Paradox">
+          <div class="cr-price">$15</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Vegetarian · Egyptian Bread</div>
+          <div class="cr-name">Falafel Paradox</div>
+          <div class="cr-aka">AKA Falafel Sandwich</div>
+          <p class="cr-desc">Crispy falafel, fried eggplant, pickles, golden fries in homemade Egyptian bread. Plant-based — but never, ever boring.</p>
+          <a href="#cta" class="cr-order"><span>Preorder →</span></a>
+        </div>
+      </div>
+
+    </div><!-- /menu-carousel -->
+  </div><!-- /menu-carousel-wrap -->
+
+  <!-- ── CAROUSEL CONTROLS ── -->
+  <div class="carousel-nav reveal">
+    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="carousel-arrows">
+      <button class="c-arrow" id="carPrev" aria-label="Previous">&#8592;</button>
+      <button class="c-arrow" id="carNext" aria-label="Next">&#8594;</button>
+    </div>
+  </div>
+
+  <!-- ── SWEET CONCLUSION ── -->
+  <div class="menu-groups" style="margin-top:90px;">
     <div class="menu-group reveal">
       <div class="menu-group-head">
         <div>
-          <div class="menu-group-kicker">Core Beliefs</div>
-          <h3 class="menu-group-title">Every Philosophy</h3>
-        </div>
-        <p class="menu-group-copy">Everything that defines the house style in one place: burgers, melts, wraps, and street favourites built with the same deliberate energy.</p>
-      </div>
-      <div class="menu-grid">
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/fried-chicken-sandwich.png" alt="False Premise"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Burger</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">False Premise</h4>
-                <div class="menu-card-aka">AKA Fried Chicken Sandwich</div>
-              </div>
-              <div class="menu-card-price">$18</div>
-            </div>
-            <p class="menu-card-desc">Crispy fried chicken, cool slaw, and melted cheese on a soft bun. Crunchy, rich, and unapologetically satisfying.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/patty-melt.png" alt="The Meltdown"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Melt</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">The Meltdown</h4>
-                <div class="menu-card-aka">AKA The Patty Melt</div>
-              </div>
-              <div class="menu-card-price">$18</div>
-            </div>
-            <p class="menu-card-desc">Smash-grilled beef patties tucked between buttery toasted bread with molten cheese and caramelised onions. Not quite a burger, not quite a toastie, absolutely worth ordering.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/double-animal-burger.png" alt="The Thinker"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Classic</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">The Thinker</h4>
-                <div class="menu-card-aka">AKA Smash Burger</div>
-              </div>
-              <div class="menu-card-price">$15</div>
-            </div>
-            <p class="menu-card-desc">A stripped-back smash burger with molten cheese, pickles, lettuce, tomato, and sauce. All the satisfaction of the house style in a cleaner, punchier build.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/shawarma.png" alt="Golden Manuscript"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Wrap</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">Golden Manuscript</h4>
-                <div class="menu-card-aka">AKA Chicken Shawarma</div>
-              </div>
-              <div class="menu-card-price">$18</div>
-            </div>
-            <p class="menu-card-desc">Juicy marinated chicken shaved fresh and wrapped in Lebanese bread with garlic sauce, tomato, pickles, and fries inside. A street classic with Sandwich Philosophy's twist.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/falafel.png" alt="Falafel Paradox"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Vegetarian</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">Falafel Paradox</h4>
-                <div class="menu-card-aka">AKA Falafel Sandwich</div>
-              </div>
-              <div class="menu-card-price">$15</div>
-            </div>
-            <p class="menu-card-desc">Crispy falafel with fried eggplant, tomato, cucumber, pickles, and golden fries tucked inside homemade Egyptian bread. Bright, crunchy, and full of bite.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/grilled-chicken.png" alt="Lean Logic"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Balanced Choice</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">Lean Logic</h4>
-                <div class="menu-card-aka">AKA Grilled Chicken Sandwich</div>
-              </div>
-              <div class="menu-card-price">$17</div>
-            </div>
-            <p class="menu-card-desc">The cleanest line in the menu: grilled chicken, house slaw, soft bun, and a measured amount of richness that never overwhelms the build.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="menu-group reveal rd2">
-      <div class="menu-group-head">
-        <div>
           <div class="menu-group-kicker">Sweet Conclusion</div>
-          <h3 class="menu-group-title">Sweet Conclusion</h3>
+          <h3 class="menu-group-title">The Sweet <em>Finish.</em></h3>
         </div>
-        <p class="menu-group-copy">Fresh-baked finishes for the weekend drop: warm, nostalgic, and just indulgent enough to feel like a reward.</p>
+        <p class="menu-group-copy">Fresh-baked and made to linger. Every dessert is the closing argument — warm, nostalgic, and impossible to walk away from.</p>
       </div>
-      <div class="menu-grid">
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/big-bite-cookie.png" alt="The Big Bite"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Cookie</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">The Big Bite</h4>
-                <div class="menu-card-aka">AKA NYC Cookie</div>
-              </div>
-              <div class="menu-card-price">$7</div>
-            </div>
-            <p class="menu-card-desc">Thick, chunky, and soft-baked with molten pockets of chocolate. Crisp at the edges, gooey at the centre, and far too good to share.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/sticky-subject-cinnamon-roll.png" alt="Sticky Subject"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Pastry</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">Sticky Subject</h4>
-                <div class="menu-card-aka">AKA Cinnamon Roll</div>
-              </div>
-              <div class="menu-card-price">$8</div>
-            </div>
-            <p class="menu-card-desc">Soft, fluffy rolls spiralled with cinnamon sugar and dripping with glaze. Warm, messy, and impossible to debate once you take a bite.</p>
-          </div>
-        </article>
-        <article class="menu-card">
-          <div class="menu-card-media"><img src="images/golden-debate-basbousa.png" alt="The Golden Debate"></div>
-          <div class="menu-card-body">
-            <div class="menu-card-kicker">Cake</div>
-            <div class="menu-card-top">
-              <div>
-                <h4 class="menu-card-name">The Golden Debate</h4>
-                <div class="menu-card-aka">AKA Basbousa</div>
-              </div>
-              <div class="menu-card-price">$7</div>
-            </div>
-            <p class="menu-card-desc">A golden semolina cake baked until tender and soaked in fragrant syrup. Sweet, nutty, and quietly rich in the most comforting way.</p>
-          </div>
-        </article>
-      </div>
-    </div>
+      <div class="dessert-showcase">
 
-  </div>
-  <div class="mosaic">
-    <div class="mc reveal">
-      <div class="mc-num">04</div>
-      <div class="mc-name">The Classic Build</div>
-      <div class="mc-aka">The OG Toastie</div>
-      <p class="mc-desc">Slow-roasted beef, aged cheddar, house mustard, pickled onions on sourdough. The one that started the whole conversation.</p>
-      <div class="mc-price">$16</div>
-    </div>
-    <div class="mc reveal rd1">
-      <div class="mc-num">05</div>
-      <div class="mc-name">The Green Thinker</div>
-      <div class="mc-aka">Vegan Rye Stack</div>
-      <p class="mc-desc">Hummus, roasted capsicum, marinated feta, rocket, pepita crunch on rye. Plants deserve better. This proves it.</p>
-      <div class="mc-price">$14</div>
-    </div>
-    <div class="mc reveal rd2">
-      <div class="mc-num">06</div>
-      <div class="mc-name">The Deep Thinker</div>
-      <div class="mc-aka">Smoked Salmon Open Face</div>
-      <p class="mc-desc">Hot smoked salmon, dill cream cheese, capers, cucumber on wholegrain. Deep, layered, complex — like all the best thoughts.</p>
-      <div class="mc-price">$18</div>
-    </div>
-    <div class="mc reveal rd3">
-      <div class="mc-num">07</div>
-      <div class="mc-name">Melt Theory</div>
-      <div class="mc-aka">Triple Cheese Brioche</div>
-      <p class="mc-desc">Three-cheese blend, slow tomato, fresh basil, garlic butter brioche. The hypothesis: cheese makes everything better. Proven.</p>
-      <div class="mc-price">$13</div>
-    </div>
-    <div class="mc reveal rd1">
-      <div class="mc-num">08</div>
-      <div class="mc-name">Steak & Argument</div>
-      <div class="mc-aka">Wagyu Special</div>
-      <p class="mc-desc">Wagyu sirloin, caramelised onion, blue cheese, rocket, horseradish cream on ciabatta. Worth every cent and every word.</p>
-      <div class="mc-price">$24</div>
-    </div>
-    <div class="mc reveal rd2">
-      <div class="mc-num">09</div>
-      <div class="mc-name">False Premise</div>
-      <div class="mc-aka">Crispy Fried Chicken</div>
-      <p class="mc-desc">Buttermilk fried chicken, hot honey, jalapeño, dill pickles, ranch. You thought it was the "healthy" choice. You were wrong.</p>
-      <div class="mc-price">$18</div>
-    </div>
-    <div class="mc reveal rd3">
-      <div class="mc-num">10</div>
-      <div class="mc-name">The BLT Hypothesis</div>
-      <div class="mc-aka">Elevated BLT</div>
-      <p class="mc-desc">Thick-cut streaky bacon, heirloom tomato, gem lettuce, lemon aioli on house white. Testing: simplicity = sophistication. Confirmed.</p>
-      <div class="mc-price">$14</div>
-    </div>
-    <div class="mc reveal rd4">
-      <div class="mc-num">11</div>
-      <div class="mc-name">Hot Take</div>
-      <div class="mc-aka">Nashville Hot Pork</div>
-      <p class="mc-desc">Nashville hot pulled pork, coleslaw, bread &amp; butter pickles, white sauce. Everyone's got one. Ours just tastes better than yours.</p>
-      <div class="mc-price">$17</div>
+        <div class="d-card">
+          <div class="d-img">
+            <img src="images/big-bite-cookie.png" alt="The Big Bite">
+            <div class="d-price-badge">$7</div>
+          </div>
+          <div class="d-body">
+            <div class="d-kicker">NYC Cookie</div>
+            <div class="d-name">The Big Bite</div>
+            <div class="d-aka">AKA NYC Cookie</div>
+            <p class="d-desc">Thick, chunky, and soft-baked with molten pockets of chocolate. Crisp at the edges, gooey at the centre. Big enough to share — too good to.</p>
+            <a href="#cta" class="d-order"><span>Add to Preorder →</span></a>
+          </div>
+        </div>
+
+        <div class="d-card">
+          <div class="d-img">
+            <img src="images/sticky-subject-cinnamon-roll.png" alt="Sticky Subject">
+            <div class="d-price-badge">$8</div>
+          </div>
+          <div class="d-body">
+            <div class="d-kicker">Cinnamon Roll</div>
+            <div class="d-name">Sticky Subject</div>
+            <div class="d-aka">AKA Cinnamon Roll</div>
+            <p class="d-desc">Soft rolls spiralled with cinnamon sugar, dripping with sweet glaze. Warm, messy, and impossible to debate once you take a bite.</p>
+            <a href="#cta" class="d-order"><span>Add to Preorder →</span></a>
+          </div>
+        </div>
+
+        <div class="d-card">
+          <div class="d-img">
+            <img src="images/golden-debate-basbousa.png" alt="The Golden Debate">
+            <div class="d-price-badge">$7</div>
+          </div>
+          <div class="d-body">
+            <div class="d-kicker">Basbousa · Middle Eastern</div>
+            <div class="d-name">The Golden Debate</div>
+            <div class="d-aka">AKA Basbousa</div>
+            <p class="d-desc">Golden semolina cake soaked in fragrant syrup. Sweet, nutty, quietly rich — a timeless bite that needs no justification.</p>
+            <a href="#cta" class="d-order"><span>Add to Preorder →</span></a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- ══ PHILOSOPHY ══ -->
@@ -2242,26 +2282,6 @@ window.addEventListener('load', () => {
   }, 2500);
 });
 
-/* ── CURSOR ── */
-const cur = document.getElementById('cur');
-const curRing = document.getElementById('cur-ring');
-let mx=0, my=0, rx=0, ry=0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx + 'px';
-  cur.style.top  = my + 'px';
-});
-(function animCursor() {
-  rx += (mx - rx) * .1;
-  ry += (my - ry) * .1;
-  curRing.style.left = rx + 'px';
-  curRing.style.top  = ry + 'px';
-  requestAnimationFrame(animCursor);
-})();
-document.querySelectorAll('a,button,.sig-card,.mc,.rv-card,.pillar,.hs').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
-});
 
 /* ── NAV SCROLL EFFECT ── */
 window.addEventListener('scroll', () => {
@@ -2392,6 +2412,150 @@ function updatePreorderCountdown() {
 
 updatePreorderCountdown();
 setInterval(updatePreorderCountdown, 1000);
+
+/* ══════════════════════════════
+   MENU CAROUSEL — FULL SYSTEM
+   Auto-scroll · Drag · Filter · Dots
+══════════════════════════════ */
+(function() {
+  const carousel   = document.getElementById('menuCarousel');
+  const dotsWrap   = document.getElementById('carouselDots');
+  const btnPrev    = document.getElementById('carPrev');
+  const btnNext    = document.getElementById('carNext');
+  const tabs       = document.querySelectorAll('.menu-tab');
+  if (!carousel) return;
+
+  const CARD_W     = 290 + 22; // card width + gap
+  const AUTO_MS    = 3200;     // auto-advance interval
+  let autoTimer    = null;
+  let isDragging   = false;
+  let dragStartX   = 0;
+  let dragScrollX  = 0;
+  let currentIndex = 0;
+
+  /* ── Build dots based on visible cards ── */
+  function buildDots() {
+    const cards = [...carousel.querySelectorAll('.cr-card:not([style*="none"])')];
+    dotsWrap.innerHTML = '';
+    cards.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'c-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+  }
+
+  /* ── Sync dot highlight ── */
+  function syncDots(idx) {
+    dotsWrap.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  /* ── Navigate to card index ── */
+  function goTo(idx) {
+    const cards = [...carousel.querySelectorAll('.cr-card:not([style*="none"])')];
+    if (!cards.length) return;
+    idx = Math.max(0, Math.min(idx, cards.length - 1));
+    currentIndex = idx;
+    carousel.scrollTo({ left: idx * CARD_W, behavior: 'smooth' });
+    syncDots(idx);
+  }
+
+  /* ── Detect current index from scroll pos ── */
+  function syncIndexFromScroll() {
+    currentIndex = Math.round(carousel.scrollLeft / CARD_W);
+    syncDots(currentIndex);
+  }
+  carousel.addEventListener('scroll', syncIndexFromScroll, { passive: true });
+
+  /* ── Arrow buttons ── */
+  btnPrev.addEventListener('click', () => { stopAuto(); goTo(currentIndex - 1); startAuto(); });
+  btnNext.addEventListener('click', () => { stopAuto(); goTo(currentIndex + 1); startAuto(); });
+
+  /* ── Auto-advance ── */
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(() => {
+      const cards = [...carousel.querySelectorAll('.cr-card:not([style*="none"])')];
+      const next  = (currentIndex + 1) % cards.length;
+      goTo(next);
+    }, AUTO_MS);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  /* ── Drag to scroll ── */
+  carousel.addEventListener('mousedown', e => {
+    isDragging  = true;
+    dragStartX  = e.pageX;
+    dragScrollX = carousel.scrollLeft;
+    stopAuto();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = e.pageX - dragStartX;
+    carousel.scrollLeft = dragScrollX - dx;
+  });
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    syncIndexFromScroll();
+    startAuto();
+  });
+
+  /* ── Touch drag ── */
+  carousel.addEventListener('touchstart', e => {
+    dragStartX  = e.touches[0].pageX;
+    dragScrollX = carousel.scrollLeft;
+    stopAuto();
+  }, { passive: true });
+  carousel.addEventListener('touchmove', e => {
+    const dx = e.touches[0].pageX - dragStartX;
+    carousel.scrollLeft = dragScrollX - dx;
+  }, { passive: true });
+  carousel.addEventListener('touchend', () => { syncIndexFromScroll(); startAuto(); });
+
+  /* ── Pause on hover ── */
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+
+  /* ── Filter tabs ── */
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      const cards  = [...carousel.querySelectorAll('.cr-card')];
+
+      cards.forEach(card => {
+        const cats = card.dataset.cat || '';
+        const show = filter === 'all' || cats.split(' ').includes(filter);
+        card.style.display = show ? '' : 'none';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(12px)';
+      });
+
+      // Stagger fade-in
+      const visible = cards.filter(c => c.style.display !== 'none');
+      visible.forEach((c, i) => {
+        setTimeout(() => {
+          c.style.transition = 'opacity .4s ease, transform .4s ease';
+          c.style.opacity = '1';
+          c.style.transform = 'translateY(0)';
+        }, i * 60);
+      });
+
+      currentIndex = 0;
+      carousel.scrollLeft = 0;
+      buildDots();
+      syncDots(0);
+      stopAuto(); startAuto();
+    });
+  });
+
+  /* ── Init ── */
+  buildDots();
+  startAuto();
+
+})();
 </script>
 </body>
 </html>
