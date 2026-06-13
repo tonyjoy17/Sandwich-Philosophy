@@ -23,10 +23,12 @@
 }
 
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-html { min-height:100%; font-size:16px; }
+html { height:100%; font-size:16px; overflow:hidden; }
 body {
+  height:100%;
   min-height:100vh;
-  overflow-x:hidden;
+  min-height:100svh;
+  overflow:hidden;
   background:var(--ink);
   color:var(--stone);
   font-family:'Lato',sans-serif;
@@ -107,10 +109,13 @@ nav {
 
 .coming-hero {
   position:relative;
-  min-height:100vh;
+  height:100vh;
+  height:100svh;
+  min-height:0;
   display:flex;
   align-items:center;
   overflow:hidden;
+  padding-bottom:48px;
 }
 .hero-bg-img {
   position:absolute;
@@ -262,7 +267,7 @@ nav {
 .hero-stats {
   position:absolute;
   right:60px;
-  bottom:60px;
+  bottom:84px;
   z-index:10;
   display:flex;
   gap:1px;
@@ -324,7 +329,9 @@ nav {
   text-transform:uppercase;
 }
 .ticker-wrap {
-  position:relative;
+  position:fixed;
+  inset-inline:0;
+  bottom:0;
   z-index:20;
   overflow:hidden;
   padding:0;
@@ -363,54 +370,112 @@ nav {
 @media(max-width:1100px) {
   nav { padding:0 28px; }
   .hero-text { padding-inline:28px; }
-  .hero-stats { right:28px; bottom:40px; }
+  .hero-stats { right:28px; bottom:72px; }
   .launch-note { right:28px; }
 }
 
 @media(max-width:760px) {
-  nav { height:66px; }
+  nav {
+    height:72px;
+    padding:0 18px;
+  }
+  .nav-logo { gap:10px; }
+  .nav-logo img {
+    width:46px;
+    height:46px;
+  }
+  .nlm { font-size:18px; }
+  .nls {
+    font-size:7px;
+    letter-spacing:4px;
+  }
   .nav-cta { display:none; }
+  .ticker-wrap { display:none; }
   .hero-bg-img {
     inset:0;
     width:100%;
-    opacity:.5;
+    opacity:.58;
   }
   .hero-bg-img::before {
-    background:linear-gradient(to right, rgba(26,8,4,.98), rgba(26,8,4,.72));
+    background:linear-gradient(to bottom, rgba(26,8,4,.96), rgba(26,8,4,.82));
   }
   .coming-hero {
-    align-items:flex-start;
-    min-height:calc(100vh - 48px);
+    display:block;
+    height:100vh;
+    height:100svh;
+    min-height:0;
+    padding:72px 0 0;
   }
   .hero-text {
-    padding:120px 24px 72px;
+    width:100%;
+    padding:30px 20px 0;
+  }
+  .hero-eyebrow {
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .hero-eyebrow-line { width:34px; }
+  .hero-eyebrow span {
+    font-size:9px;
+    letter-spacing:4px;
   }
   .hero-h1 {
-    font-size:clamp(54px,18vw,82px);
+    font-size:clamp(50px,17vw,76px);
+    line-height:.86;
+  }
+  .hero-desc {
+    max-width:95%;
+    margin:18px 0 22px;
+    font-size:14px;
+    line-height:1.55;
+  }
+  .hero-btns {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    max-width:420px;
   }
   .hero-btns a {
     width:100%;
-    max-width:320px;
+    max-width:none;
+    padding:13px 12px;
+    font-size:10px;
+    letter-spacing:2px;
     text-align:center;
   }
-  .hero-stats,
-  .launch-note {
-    position:relative;
-    right:auto;
-    top:auto;
-    bottom:auto;
-    margin:0 24px 28px;
-  }
+  .launch-note { display:none; }
   .hero-stats {
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:18px;
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:1px;
+    margin:0;
   }
   .hs {
     min-width:0;
-    padding:14px 10px;
+    padding:12px 8px;
   }
-  .hs-num { font-size:24px; }
+  .hs-num { font-size:22px; }
   .hs-lbl { font-size:8px; letter-spacing:2px; }
+}
+
+@media(max-width:380px) {
+  .hero-text { padding-top:22px; }
+  .hero-h1 { font-size:clamp(44px,16vw,62px); }
+  .hero-desc {
+    margin:14px 0 18px;
+    font-size:13px;
+    line-height:1.45;
+  }
+  .hero-btns a {
+    padding:11px 10px;
+    font-size:9px;
+  }
+  .hero-stats { bottom:12px; }
+  .hs { padding:10px 6px; }
 }
 </style>
 </head>
@@ -442,8 +507,8 @@ nav {
       </h1>
       <p class="hero-desc">
         The weekend drop is growing up. Sandwich Philosophy is opening its first
-        Adelaide restaurant, turning Friday-Sunday sellouts into a permanent place
-        for deliberate sandwiches, familiar faces, and fresh experiments.
+        Adelaide restaurant: a permanent home for deliberate sandwiches, familiar
+        faces, and fresh experiments.
       </p>
       <div class="hero-btns" aria-label="Page actions">
         <a href="mailto:hello@sandwichphilosophy.com" class="btn-amber"><span>Get Opening Updates</span></a>
