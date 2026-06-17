@@ -309,6 +309,17 @@ nav {
 .count-title::after {
   left:calc(100% + 4px);
 }
+.count-date {
+  grid-column:1 / -1;
+  margin-top:-8px;
+  color:rgba(232,176,64,.78);
+  font-family:'Oswald',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:4px;
+  text-align:center;
+  text-transform:uppercase;
+}
 .count-unit {
   position:relative;
   display:grid;
@@ -524,7 +535,7 @@ nav {
     grid-template-columns:1fr 1fr;
     gap:10px;
     max-width:100%;
-    margin-bottom:46px;
+    margin-bottom:78px;
   }
   .hero-btns a {
     width:100%;
@@ -554,6 +565,12 @@ nav {
     font-size:clamp(18px, 5.8vw, 26px);
     letter-spacing:6px;
     padding-left:6px;
+  }
+  .count-date {
+    margin-top:-2px;
+    margin-bottom:3px;
+    font-size:10px;
+    letter-spacing:2.8px;
   }
   .count-title::before,
   .count-title::after { display:none; }
@@ -590,7 +607,7 @@ nav {
     padding:11px 10px;
     font-size:9px;
   }
-  .hero-btns { margin-bottom:38px; }
+  .hero-btns { margin-bottom:58px; }
   .countdown {
     width:calc(100% - 28px);
     gap:4px;
@@ -599,6 +616,10 @@ nav {
   .count-title {
     font-size:16px;
     letter-spacing:4px;
+  }
+  .count-date {
+    font-size:9px;
+    letter-spacing:2px;
   }
   .count-unit { min-height:54px; }
   .count-num {
@@ -659,6 +680,7 @@ nav {
 
     <div class="countdown" aria-label="Countdown to opening on July 1, 2026">
       <div class="count-title">Opening Soon</div>
+      <div class="count-date">July 1, 2026</div>
       <div class="count-unit">
         <div class="count-num" data-count="days">00</div>
         <div class="count-lbl">Days</div>
