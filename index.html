@@ -264,42 +264,109 @@ nav {
   color:var(--amber);
   border-color:var(--amber);
 }
-.hero-stats {
+.countdown {
   position:absolute;
-  right:60px;
-  bottom:84px;
+  left:54%;
+  top:46%;
   z-index:10;
-  display:flex;
-  gap:1px;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(72px, 92px));
+  gap:18px;
+  width:min(560px, 44vw);
+  transform:translate(-42%, -50%);
   opacity:0;
   animation:fUp .8s ease .9s forwards;
 }
-.hs {
-  min-width:128px;
-  padding:18px 22px;
+.count-title {
+  grid-column:1 / -1;
+  position:relative;
+  color:rgba(250,247,242,.92);
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(22px, 2.6vw, 42px);
+  font-weight:300;
+  letter-spacing:18px;
+  line-height:1;
   text-align:center;
-  background:rgba(26,8,4,.75);
-  border:1px solid rgba(184,116,14,.2);
-  backdrop-filter:blur(12px);
-  transition:background .3s,transform .3s;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 10px rgba(232,176,64,.75),
+    0 0 26px rgba(184,116,14,.46),
+    0 0 54px rgba(184,116,14,.28);
 }
-.hs:hover {
-  background:rgba(184,116,14,.12);
+.count-title::before,
+.count-title::after {
+  content:'';
+  position:absolute;
+  top:50%;
+  width:56px;
+  height:2px;
+  background:linear-gradient(to right, transparent, var(--amber-l), transparent);
+  box-shadow:0 0 18px rgba(232,176,64,.85);
+}
+.count-title::before {
+  right:calc(100% + 22px);
+}
+.count-title::after {
+  left:calc(100% + 4px);
+}
+.count-unit {
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-width:0;
+  min-height:92px;
+  padding:0 0 24px;
+  background:
+    linear-gradient(to bottom, rgba(232,176,64,.09), rgba(26,8,4,.18)),
+    rgba(26,8,4,.16);
+  border:1px solid rgba(232,176,64,.16);
+  box-shadow:
+    inset 0 0 24px rgba(184,116,14,.1),
+    0 18px 48px rgba(26,8,4,.28);
+  text-align:center;
+  backdrop-filter:blur(8px);
+  transition:transform .3s, border-color .3s;
+}
+.count-unit:hover {
+  border-color:rgba(232,176,64,.35);
   transform:translateY(-4px);
 }
-.hs-num {
-  color:var(--amber-l);
+.count-num {
+  display:grid;
+  place-items:center;
+  width:min(72px, 100%);
+  min-height:48px;
+  color:var(--stone);
+  background:linear-gradient(145deg, rgba(212,150,10,.95), rgba(184,116,14,.88));
+  border-radius:6px;
+  box-shadow:
+    0 0 20px rgba(232,176,64,.36),
+    inset 0 1px 0 rgba(255,255,255,.2);
   font-family:'Oswald',sans-serif;
-  font-size:32px;
-  font-weight:700;
+  font-size:34px;
+  font-weight:400;
+  letter-spacing:1px;
   line-height:1;
 }
-.hs-lbl {
-  margin-top:4px;
-  color:rgba(240,236,229,.4);
-  font-size:9px;
-  letter-spacing:3px;
+.count-num::after {
+  content:'';
+  position:absolute;
+  left:calc(50% - 36px);
+  top:calc(50% - 12px);
+  width:72px;
+  height:1px;
+  background:rgba(26,8,4,.28);
+}
+.count-lbl {
+  position:absolute;
+  left:50%;
+  bottom:5px;
+  transform:translateX(-50%);
+  color:rgba(240,236,229,.52);
+  font-size:8px;
+  letter-spacing:2.4px;
   text-transform:uppercase;
+  white-space:nowrap;
 }
 .launch-note {
   position:absolute;
@@ -370,7 +437,29 @@ nav {
 @media(max-width:1100px) {
   nav { padding:0 28px; }
   .hero-text { padding-inline:28px; }
-  .hero-stats { right:28px; bottom:72px; }
+  .countdown {
+    left:56%;
+    width:min(440px, 46vw);
+    grid-template-columns:repeat(4, minmax(60px, 1fr));
+    gap:12px;
+    transform:translate(-34%, -42%);
+  }
+  .count-title {
+    font-size:24px;
+    letter-spacing:10px;
+  }
+  .count-title::before,
+  .count-title::after { width:34px; }
+  .count-unit { min-height:78px; }
+  .count-num {
+    width:56px;
+    min-height:42px;
+    font-size:28px;
+  }
+  .count-num::after {
+    left:calc(50% - 28px);
+    width:56px;
+  }
   .launch-note { right:28px; }
 }
 
@@ -408,7 +497,7 @@ nav {
   }
   .hero-text {
     width:100%;
-    padding:30px 20px 0;
+    padding:34px 18px 0;
   }
   .hero-eyebrow {
     gap:10px;
@@ -420,20 +509,22 @@ nav {
     letter-spacing:4px;
   }
   .hero-h1 {
-    font-size:clamp(50px,17vw,76px);
-    line-height:.86;
+    max-width:92vw;
+    font-size:clamp(42px,13.5vw,62px);
+    line-height:.88;
   }
   .hero-desc {
-    max-width:95%;
-    margin:18px 0 22px;
-    font-size:14px;
-    line-height:1.55;
+    max-width:94vw;
+    margin:18px 0 20px;
+    font-size:13.5px;
+    line-height:1.5;
   }
   .hero-btns {
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
-    max-width:420px;
+    max-width:100%;
+    margin-bottom:46px;
   }
   .hero-btns a {
     width:100%;
@@ -444,38 +535,82 @@ nav {
     text-align:center;
   }
   .launch-note { display:none; }
-  .hero-stats {
-    position:absolute;
-    left:20px;
-    right:20px;
-    bottom:18px;
+  .countdown {
+    position:relative;
+    left:auto;
+    right:auto;
+    top:auto;
+    bottom:auto;
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:1px;
-    margin:0;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    width:calc(100% - 36px);
+    max-width:420px;
+    gap:6px;
+    margin:0 auto;
+    transform:none;
   }
-  .hs {
-    min-width:0;
-    padding:12px 8px;
+  .count-title {
+    margin-bottom:2px;
+    font-size:clamp(18px, 5.8vw, 26px);
+    letter-spacing:6px;
+    padding-left:6px;
   }
-  .hs-num { font-size:22px; }
-  .hs-lbl { font-size:8px; letter-spacing:2px; }
+  .count-title::before,
+  .count-title::after { display:none; }
+  .count-unit {
+    min-height:60px;
+    padding-bottom:16px;
+  }
+  .count-num {
+    width:44px;
+    min-height:34px;
+    border-radius:5px;
+    font-size:21px;
+  }
+  .count-num::after {
+    left:calc(50% - 22px);
+    width:44px;
+  }
+  .count-lbl {
+    bottom:4px;
+    font-size:6px;
+    letter-spacing:1.3px;
+  }
 }
 
 @media(max-width:380px) {
   .hero-text { padding-top:22px; }
-  .hero-h1 { font-size:clamp(44px,16vw,62px); }
+  .hero-h1 { font-size:clamp(38px,13vw,50px); }
   .hero-desc {
     margin:14px 0 18px;
-    font-size:13px;
+    font-size:12.5px;
     line-height:1.45;
   }
   .hero-btns a {
     padding:11px 10px;
     font-size:9px;
   }
-  .hero-stats { bottom:12px; }
-  .hs { padding:10px 6px; }
+  .hero-btns { margin-bottom:38px; }
+  .countdown {
+    width:calc(100% - 28px);
+    gap:4px;
+    margin-top:0;
+  }
+  .count-title {
+    font-size:16px;
+    letter-spacing:4px;
+  }
+  .count-unit { min-height:54px; }
+  .count-num {
+    width:38px;
+    min-height:30px;
+    font-size:18px;
+  }
+  .count-num::after {
+    left:calc(50% - 19px);
+    width:38px;
+  }
+  .count-lbl { font-size:5.5px; letter-spacing:.8px; }
 }
 </style>
 </head>
@@ -522,18 +657,23 @@ nav {
       Sandwich Philosophy home in Adelaide.
     </aside>
 
-    <div class="hero-stats" aria-label="Launch progress">
-      <div class="hs">
-        <div class="hs-num">01</div>
-        <div class="hs-lbl">Weekend Drops</div>
+    <div class="countdown" aria-label="Countdown to opening on July 1, 2026">
+      <div class="count-title">Opening Soon</div>
+      <div class="count-unit">
+        <div class="count-num" data-count="days">00</div>
+        <div class="count-lbl">Days</div>
       </div>
-      <div class="hs">
-        <div class="hs-num">02</div>
-        <div class="hs-lbl">First Outlet</div>
+      <div class="count-unit">
+        <div class="count-num" data-count="hours">00</div>
+        <div class="count-lbl">Hours</div>
       </div>
-      <div class="hs">
-        <div class="hs-num">03</div>
-        <div class="hs-lbl">Restaurant Era</div>
+      <div class="count-unit">
+        <div class="count-num" data-count="minutes">00</div>
+        <div class="count-lbl">Minutes</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" data-count="seconds">00</div>
+        <div class="count-lbl">Seconds</div>
       </div>
     </div>
   </main>
@@ -550,5 +690,30 @@ nav {
       <span class="ti">The Philosophy Gets A Home</span><span class="td">/</span>
     </div>
   </div>
+  <script>
+    const openingTime = new Date('2026-07-01T00:00:00+09:30').getTime();
+    const countNodes = {
+      days: document.querySelector('[data-count="days"]'),
+      hours: document.querySelector('[data-count="hours"]'),
+      minutes: document.querySelector('[data-count="minutes"]'),
+      seconds: document.querySelector('[data-count="seconds"]')
+    };
+    function setCountdown() {
+      const remaining = Math.max(0, openingTime - Date.now());
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      countNodes.days.textContent = String(days).padStart(2, '0');
+      countNodes.hours.textContent = String(hours).padStart(2, '0');
+      countNodes.minutes.textContent = String(minutes).padStart(2, '0');
+      countNodes.seconds.textContent = String(seconds).padStart(2, '0');
+    }
+
+    setCountdown();
+    setInterval(setCountdown, 1000);
+  </script>
 </body>
 </html>
