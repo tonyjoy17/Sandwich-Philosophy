@@ -65,8 +65,8 @@ nav {
   text-decoration:none;
 }
 .nav-logo img {
-  width:44px;
-  height:44px;
+  width:70px;
+  height:70px;
   object-fit:contain;
   filter:drop-shadow(0 2px 8px rgba(184,116,14,.3));
 }
@@ -79,7 +79,7 @@ nav {
 .nlm {
   color:var(--stone);
   font-family:'Oswald',sans-serif;
-  font-size:17px;
+  font-size:19px;
   font-weight:600;
   letter-spacing:1px;
 }
@@ -476,15 +476,18 @@ nav {
 
 @media(max-width:760px) {
   nav {
-    height:72px;
+    height:78px;
     padding:0 18px;
   }
   .nav-logo { gap:10px; }
   .nav-logo img {
-    width:46px;
-    height:46px;
+    width:70px;
+    height:70px;
   }
-  .nlm { font-size:18px; }
+  .nlm {
+    font-size:17px;
+    letter-spacing:.6px;
+  }
   .nls {
     font-size:7px;
     letter-spacing:4px;
@@ -504,7 +507,7 @@ nav {
     height:100vh;
     height:100svh;
     min-height:0;
-    padding:72px 0 0;
+    padding:78px 0 0;
   }
   .hero-text {
     width:100%;
@@ -640,7 +643,7 @@ nav {
     <div class="nav-logo" aria-label="Sandwich Philosophy">
       <img src="images/logo.png" alt="Sandwich Philosophy">
       <span class="nav-logo-text">
-        <span class="nlm">SANDWICH</span>
+        <span class="nlm">SANDWICH PHILOSOPHY</span>
         <span class="nls">Est. 2024 · Adelaide SA</span>
       </span>
     </div>
@@ -678,9 +681,9 @@ nav {
       Sandwich Philosophy home in Adelaide.
     </aside>
 
-    <div class="countdown" aria-label="Countdown to opening on July 1, 2026">
+    <div class="countdown" aria-label="Countdown to opening on July 3, 2026">
       <div class="count-title">Opening Soon</div>
-      <div class="count-date">July 1, 2026</div>
+      <div class="count-date">July 3, 2026</div>
       <div class="count-unit">
         <div class="count-num" data-count="days">00</div>
         <div class="count-lbl">Days</div>
@@ -713,7 +716,7 @@ nav {
     </div>
   </div>
   <script>
-    const openingTime = new Date('2026-07-01T00:00:00+09:30').getTime();
+    const openingTime = new Date('2026-07-03T00:00:00+09:30').getTime();
     const countNodes = {
       days: document.querySelector('[data-count="days"]'),
       hours: document.querySelector('[data-count="hours"]'),
