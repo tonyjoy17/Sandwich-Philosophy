@@ -816,8 +816,7 @@ nav.scrolled {
 /* ══════════════════════════════
    PREORDER + MYSTERY DROPS
 ══════════════════════════════ */
-#preorder-drop,
-#mystery-drop {
+#preorder-drop {
   position:relative;
   overflow:hidden;
 }
@@ -939,177 +938,6 @@ nav.scrolled {
   letter-spacing:5px;
   text-transform:uppercase;
   color:rgba(240,236,229,.28);
-}
-
-#mystery-drop {
-  padding:110px 60px;
-  background:
-    radial-gradient(circle at 76% 42%, rgba(184,116,14,.12), transparent 18%),
-    linear-gradient(90deg, #240b06 0%, #190705 50%, #130403 100%);
-}
-
-#mystery-drop::before {
-  content:'';
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 15% 18%, rgba(184,116,14,.08), transparent 10%),
-    radial-gradient(circle at 84% 20%, rgba(184,116,14,.2), transparent 1%),
-    linear-gradient(180deg, rgba(92,18,5,.18), transparent 45%);
-  pointer-events:none;
-}
-
-.mystery-wrap {
-  position:relative;
-  z-index:1;
-  max-width:1240px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:minmax(0, 1.15fr) 420px;
-  gap:70px;
-  align-items:center;
-}
-
-.mystery-copy {
-  max-width:900px;
-}
-
-.mystery-kicker {
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  font-size:10px;
-  letter-spacing:7px;
-  text-transform:uppercase;
-  color:rgba(184,116,14,.78);
-  margin-bottom:20px;
-}
-
-.mystery-kicker::before {
-  content:'';
-  width:30px;
-  height:1px;
-  background:var(--amber);
-}
-
-.mystery-title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(56px,8vw,102px);
-  font-weight:900;
-  line-height:.92;
-  letter-spacing:-2px;
-  color:var(--stone);
-  margin-bottom:28px;
-}
-
-.mystery-title em {
-  display:block;
-  font-style:italic;
-  font-weight:400;
-  color:var(--amber-l);
-}
-
-.mystery-text {
-  max-width:860px;
-  font-size:17px;
-  line-height:1.9;
-  color:rgba(240,236,229,.46);
-  font-weight:300;
-}
-
-.mystery-text + .mystery-text {
-  margin-top:20px;
-}
-
-.mystery-highlight {
-  margin:48px 0 34px;
-  border:1px solid rgba(184,116,14,.22);
-  background:linear-gradient(180deg, rgba(184,116,14,.06), rgba(62,12,3,.16));
-  padding:34px 32px;
-}
-
-.mystery-highlight-kicker {
-  font-size:11px;
-  letter-spacing:6px;
-  text-transform:uppercase;
-  color:var(--amber);
-  margin-bottom:14px;
-}
-
-.mystery-highlight h3 {
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:700;
-  color:var(--stone);
-  margin-bottom:10px;
-}
-
-.mystery-highlight p {
-  font-size:14px;
-  line-height:1.8;
-  color:rgba(240,236,229,.42);
-}
-
-.mystery-orbit {
-  position:relative;
-  width:min(100%, 420px);
-  aspect-ratio:1 / 1;
-  margin-inline:auto;
-  border-radius:50%;
-  border:1px dashed rgba(184,116,14,.14);
-}
-
-.mystery-orbit::before,
-.mystery-orbit::after {
-  content:'';
-  position:absolute;
-  border-radius:50%;
-}
-
-.mystery-orbit::before {
-  inset:14%;
-  border:1px solid rgba(184,116,14,.16);
-}
-
-.mystery-orbit::after {
-  width:16px;
-  height:16px;
-  top:10%;
-  right:18%;
-  background:var(--amber-l);
-  box-shadow:0 0 18px rgba(212,150,10,.4);
-}
-
-.mystery-mark {
-  position:absolute;
-  inset:50%;
-  transform:translate(-50%, -50%);
-  width:56%;
-  aspect-ratio:1 / 1;
-  border-radius:50%;
-  border:1px solid rgba(184,116,14,.18);
-  background:radial-gradient(circle at 30% 30%, rgba(92,18,5,.58), rgba(26,8,4,.92));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.mystery-mark span {
-  font-family:'Playfair Display',serif;
-  font-size:150px;
-  line-height:1;
-  color:rgba(184,116,14,.28);
-}
-
-.mystery-ring-copy {
-  position:absolute;
-  top:25%;
-  left:50%;
-  transform:translateX(-50%) rotate(-12deg);
-  font-size:9px;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  color:rgba(184,116,14,.42);
 }
 
 /* ══════════════════════════════
@@ -1364,12 +1192,29 @@ nav.scrolled {
 .social-label { font-size:9px; letter-spacing:7px; text-transform:uppercase; color:rgba(184,116,14,.7); margin-bottom:16px; }
 .social-h { font-family:'Playfair Display',serif; font-size:clamp(32px,4vw,52px); font-weight:900; color:var(--stone); margin-bottom:8px; }
 .social-sub { font-size:14px; color:rgba(240,236,229,.5); font-weight:300; margin-bottom:40px; }
+.social-links {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+}
 .social-handle {
-  display:inline-flex; align-items:center; gap:12px;
+  display:grid; grid-template-columns:28px 1fr; align-items:center; gap:14px;
+  width:min(100%, 322px);
+  min-height:62px;
   font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
   color:var(--amber-ll); text-decoration:none;
-  border:1px solid rgba(232,176,64,.3); padding:14px 32px;
+  border:1px solid rgba(232,176,64,.3); padding:0 36px;
   transition:all .35s; position:relative; z-index:2;
+  text-align:left;
+}
+.social-handle + .social-handle {
+  margin-top:-1px;
+}
+.social-handle svg {
+  width:22px;
+  height:22px;
+  justify-self:center;
 }
 .social-handle:hover { background:rgba(184,116,14,.15); border-color:var(--amber); }
 
@@ -1556,10 +1401,9 @@ footer {
   #process { padding:80px 28px; }
   .timeline { flex-direction:column; gap:32px; }
   .timeline::before { display:none; }
-  #preorder-drop, #mystery-drop { padding:80px 28px; }
+  #preorder-drop { padding:80px 28px; }
   .preorder-countdown { grid-template-columns:repeat(2, minmax(140px, 1fr)); gap:18px; }
   .count-card::after { display:none; }
-  .mystery-wrap { grid-template-columns:1fr; gap:46px; }
   #journey { padding:90px 28px 80px; }
   .journey-head { margin-bottom:60px; }
   .journey-timeline { gap:34px; }
@@ -1625,9 +1469,12 @@ footer {
   .drop-actions { flex-direction:column; align-items:stretch; }
   .drop-actions a { text-align:center; }
   .preorder-countdown { grid-template-columns:1fr 1fr; }
-  .mystery-title, .drop-title { letter-spacing:-1px; }
-  .mystery-highlight { padding:26px 22px; }
-  .mystery-mark span { font-size:112px; }
+  .drop-title { letter-spacing:-1px; }
+  .social-handle {
+    width:min(100%, 318px);
+    padding:0 28px;
+    font-size:12px;
+  }
   .journey-title { letter-spacing:-1px; }
 }
 </style>
@@ -2149,8 +1996,6 @@ footer {
     <h2 class="drop-title reveal">Visit Our <em>First Store.</em></h2>
     <p class="drop-copy reveal rd1">Sandwich Philosophy is now open at Shop 23A/508-514 Port Rd, Welland SA 5007. Walk in, order your favourites, or call ahead if you want us to get your feed started.</p>
     <div class="drop-actions reveal rd2">
-      <a href="https://www.ubereats.com/au/store/sandwich-philosophy/fd5JDhYgVnWreR1LDPdapg" class="platform-btn" target="_blank" rel="noopener" aria-label="Order on Uber Eats"><img src="images/ubereats.png" alt="Uber Eats"></a>
-      <a href="https://www.doordash.com/en-AU/store/sandwich-philosophy-welland-48154129/113720996" class="platform-btn doordash" target="_blank" rel="noopener" aria-label="Order on DoorDash"><img src="images/DoorDash-logo.png" alt="DoorDash"></a>
       <a href="tel:+61416944799" class="btn-amber"><span>Call Store</span></a>
       <a href="https://www.google.com/maps/search/?api=1&query=Shop%2023A%2F508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Get Directions</a>
     </div>
@@ -2177,33 +2022,6 @@ footer {
   </div>
 </section>
 
-<!-- ══ STORE EXPERIENCE ══ -->
-<section id="mystery-drop">
-  <div class="mystery-wrap">
-    <div class="mystery-copy">
-      <div class="mystery-kicker reveal">Fast Food Restaurant</div>
-      <h2 class="mystery-title reveal">Open for <em>Walk Ins.</em></h2>
-      <p class="mystery-text reveal rd1">Our first store is open through the week with burgers, sides, sauces, drinks and tacos ready from the Welland kitchen.</p>
-      <p class="mystery-text reveal rd2">Find us on Port Road, follow along for daily updates, and come in hungry. The philosophy is officially open for service.</p>
-      <div class="mystery-highlight reveal rd3">
-        <div class="mystery-highlight-kicker">Google Rating</div>
-        <h3>5.0 from 12 Google reviews</h3>
-        <p>Address: Shop 23A/508-514 Port Rd, Welland SA 5007. Phone: 0416 944 799.</p>
-      </div>
-      <div class="drop-actions reveal rd4">
-        <a href="https://www.ubereats.com/au/store/sandwich-philosophy/fd5JDhYgVnWreR1LDPdapg" class="platform-btn" target="_blank" rel="noopener" aria-label="Order on Uber Eats"><img src="images/ubereats.png" alt="Uber Eats"></a>
-        <a href="https://www.doordash.com/en-AU/store/sandwich-philosophy-welland-48154129/113720996" class="platform-btn doordash" target="_blank" rel="noopener" aria-label="Order on DoorDash"><img src="images/DoorDash-logo.png" alt="DoorDash"></a>
-        <a href="https://www.google.com/maps/search/?api=1&query=Shop%2023A%2F508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Open Maps</a>
-      </div>
-    </div>
-    <div class="mystery-orbit reveal-right">
-      <div class="mystery-ring-copy">Now Open</div>
-      <div class="mystery-mark"><span>SP</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ JOURNEY ══ -->
 <section id="journey">
   <div class="journey-wrap">
     <div class="journey-head">
@@ -2293,14 +2111,16 @@ footer {
   <div class="social-label reveal">Follow the Philosophy</div>
   <h2 class="social-h reveal">@SandwichPhilosophy</h2>
   <p class="social-sub reveal">Behind the scenes builds, daily specials and the occasional existential crisis. Come for the food, stay for the ideas.</p>
-  <a href="https://www.instagram.com/sandwichphilosophy/" class="social-handle reveal" target="_blank" rel="noopener">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-    Follow on Instagram
-  </a>
-  <a href="https://www.facebook.com/sandwichphilosophy/" class="social-handle reveal rd1" target="_blank" rel="noopener">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V14h2.8v8h3.4z"/></svg>
-    Follow on Facebook
-  </a>
+  <div class="social-links reveal">
+    <a href="https://www.instagram.com/sandwichphilosophy/" class="social-handle" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      <span>Follow on Instagram</span>
+    </a>
+    <a href="https://www.facebook.com/sandwichphilosophy/" class="social-handle" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V14h2.8v8h3.4z"/></svg>
+      <span>Follow on Facebook</span>
+    </a>
+  </div>
 </section>
 
 <!-- ══ CTA ══ -->
