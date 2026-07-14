@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>First Adelaide Outlet Coming Soon | Sandwich Philosophy</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Oswald:wght@300;400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --maroon:    #5C1205;
+  --maroon-d:  #3E0C03;
+  --maroon-l:  #7A1A08;
+  --amber:     #B8740E;
+  --amber-l:   #D4960A;
+  --amber-ll:  #E8B040;
+  --stone:     #F0ECE5;
+  --stone-d:   #E0D8CC;
+  --parchment: #FAF7F2;
+  --ink:       #1A0804;
+  --text:      #2E1008;
+  --muted:     #7A5040;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { height:100%; font-size:16px; overflow:hidden; }
+body {
+  height:100%;
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+  background:var(--ink);
+  color:var(--stone);
+  font-family:'Lato',sans-serif;
+}
+
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:9000;
+  pointer-events:none;
+  opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+nav {
+  position:fixed;
+  inset-inline:0;
+  top:0;
+  z-index:500;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:70px;
+  padding:0 60px;
+  background:rgba(26,8,4,.74);
+  border-bottom:1px solid rgba(184,116,14,.15);
+  backdrop-filter:blur(20px) saturate(150%);
+}
+.nav-logo {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+}
+.nav-logo img {
+  width:70px;
+  height:70px;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 8px rgba(184,116,14,.3));
+}
+.nav-logo-text {
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  line-height:1;
+}
+.nlm {
+  color:var(--stone);
+  font-family:'Oswald',sans-serif;
+  font-size:19px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+.nls {
+  color:var(--amber);
+  font-size:8px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+}
+.nav-cta {
+  padding:10px 28px;
+  color:var(--maroon-d);
+  background:var(--amber);
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:3px;
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:background .3s,transform .25s;
+}
+.nav-cta:hover {
+  background:var(--amber-l);
+  transform:translateY(-2px);
+}
+
+.coming-hero {
+  position:relative;
+  height:100vh;
+  height:100svh;
+  min-height:0;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding-bottom:48px;
+}
+.hero-bg-img {
+  position:absolute;
+  inset:0 0 0 auto;
+  z-index:2;
+  width:56%;
+  overflow:hidden;
+}
+.hero-bg-img img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  filter:brightness(.68) saturate(1.16);
+  transform:scale(1.08);
+  animation:heroZoom 14s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform:scale(1.08); }
+  to { transform:scale(1.18); }
+}
+.hero-bg-img::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:linear-gradient(to right, rgba(26,8,4,1) 0%, rgba(26,8,4,.75) 32%, rgba(26,8,4,0) 68%);
+}
+.hero-bg-img::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:linear-gradient(to top, rgba(26,8,4,.94) 0%, transparent 42%);
+}
+.hero-text {
+  position:relative;
+  z-index:10;
+  width:min(760px,100%);
+  padding:130px 60px 92px;
+}
+.hero-eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+  opacity:0;
+  animation:fUp .6s ease .18s forwards;
+}
+.hero-eyebrow-line {
+  width:36px;
+  height:1px;
+  background:var(--amber);
+}
+.hero-eyebrow span {
+  color:var(--amber);
+  font-size:10px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+}
+.hero-h1 {
+  color:var(--stone);
+  font-family:'Playfair Display',serif;
+  font-size:clamp(58px,8vw,118px);
+  font-weight:900;
+  line-height:.9;
+  letter-spacing:-2px;
+  opacity:0;
+  animation:fUp .9s ease .34s forwards;
+}
+.hero-h1 .line-gold {
+  display:block;
+  color:var(--amber-l);
+}
+.hero-h1 .line-italic {
+  display:block;
+  color:rgba(240,236,229,.62);
+  font-size:.8em;
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:-1px;
+}
+.hero-desc {
+  max-width:440px;
+  margin:26px 0 40px;
+  color:rgba(240,236,229,.58);
+  font-size:16px;
+  font-weight:300;
+  line-height:1.8;
+  opacity:0;
+  animation:fUp .8s ease .5s forwards;
+}
+.hero-btns {
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  opacity:0;
+  animation:fUp .7s ease .68s forwards;
+}
+.btn-amber {
+  position:relative;
+  overflow:hidden;
+  padding:15px 40px;
+  color:var(--maroon-d);
+  background:var(--amber);
+  box-shadow:0 8px 40px rgba(184,116,14,.45);
+  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:background .3s,transform .3s,box-shadow .3s;
+}
+.btn-amber::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--amber-l);
+  transform:translateX(-105%);
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.btn-amber span {
+  position:relative;
+  z-index:1;
+}
+.btn-amber:hover::before { transform:translateX(0); }
+.btn-amber:hover {
+  transform:translateY(-3px);
+  box-shadow:0 16px 50px rgba(184,116,14,.55);
+}
+.btn-ghost {
+  padding:15px 40px;
+  color:var(--stone);
+  border:1.5px solid rgba(240,236,229,.25);
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:3px;
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:all .35s;
+}
+.btn-ghost:hover {
+  color:var(--amber);
+  border-color:var(--amber);
+}
+.countdown {
+  position:absolute;
+  left:54%;
+  top:46%;
+  z-index:10;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(72px, 92px));
+  gap:18px;
+  width:min(560px, 44vw);
+  transform:translate(-42%, -50%);
+  opacity:0;
+  animation:fUp .8s ease .9s forwards;
+}
+.count-title {
+  grid-column:1 / -1;
+  position:relative;
+  color:rgba(250,247,242,.92);
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(22px, 2.6vw, 42px);
+  font-weight:300;
+  letter-spacing:18px;
+  line-height:1;
+  text-align:center;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 10px rgba(232,176,64,.75),
+    0 0 26px rgba(184,116,14,.46),
+    0 0 54px rgba(184,116,14,.28);
+}
+.count-title::before,
+.count-title::after {
+  content:'';
+  position:absolute;
+  top:50%;
+  width:56px;
+  height:2px;
+  background:linear-gradient(to right, transparent, var(--amber-l), transparent);
+  box-shadow:0 0 18px rgba(232,176,64,.85);
+}
+.count-title::before {
+  right:calc(100% + 22px);
+}
+.count-title::after {
+  left:calc(100% + 4px);
+}
+.count-date {
+  grid-column:1 / -1;
+  margin-top:-8px;
+  color:rgba(232,176,64,.78);
+  font-family:'Oswald',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:4px;
+  text-align:center;
+  text-transform:uppercase;
+}
+.count-unit {
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-width:0;
+  min-height:92px;
+  padding:0 0 24px;
+  background:
+    linear-gradient(to bottom, rgba(232,176,64,.09), rgba(26,8,4,.18)),
+    rgba(26,8,4,.16);
+  border:1px solid rgba(232,176,64,.16);
+  box-shadow:
+    inset 0 0 24px rgba(184,116,14,.1),
+    0 18px 48px rgba(26,8,4,.28);
+  text-align:center;
+  backdrop-filter:blur(8px);
+  transition:transform .3s, border-color .3s;
+}
+.count-unit:hover {
+  border-color:rgba(232,176,64,.35);
+  transform:translateY(-4px);
+}
+.count-num {
+  display:grid;
+  place-items:center;
+  width:min(72px, 100%);
+  min-height:48px;
+  color:var(--stone);
+  background:linear-gradient(145deg, rgba(212,150,10,.95), rgba(184,116,14,.88));
+  border-radius:6px;
+  box-shadow:
+    0 0 20px rgba(232,176,64,.36),
+    inset 0 1px 0 rgba(255,255,255,.2);
+  font-family:'Oswald',sans-serif;
+  font-size:34px;
+  font-weight:400;
+  letter-spacing:1px;
+  line-height:1;
+}
+.count-num::after {
+  content:'';
+  position:absolute;
+  left:calc(50% - 36px);
+  top:calc(50% - 12px);
+  width:72px;
+  height:1px;
+  background:rgba(26,8,4,.28);
+}
+.count-lbl {
+  position:absolute;
+  left:50%;
+  bottom:5px;
+  transform:translateX(-50%);
+  color:rgba(240,236,229,.52);
+  font-size:8px;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.launch-note {
+  position:absolute;
+  right:60px;
+  top:116px;
+  z-index:10;
+  max-width:260px;
+  padding:20px 22px;
+  background:rgba(26,8,4,.72);
+  border:1px solid rgba(184,116,14,.22);
+  backdrop-filter:blur(12px);
+  color:rgba(240,236,229,.6);
+  font-size:13px;
+  font-weight:300;
+  line-height:1.7;
+  opacity:0;
+  animation:fUp .8s ease 1s forwards;
+}
+.launch-note strong {
+  display:block;
+  margin-bottom:6px;
+  color:var(--amber-l);
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+.ticker-wrap {
+  position:fixed;
+  inset-inline:0;
+  bottom:0;
+  z-index:20;
+  overflow:hidden;
+  padding:0;
+  background:var(--amber);
+  border-top:2px solid var(--amber-l);
+  border-bottom:2px solid rgba(92,18,5,.3);
+}
+.ticker-inner {
+  display:flex;
+  width:max-content;
+  animation:tick 24s linear infinite;
+}
+.ti {
+  padding:14px 30px;
+  color:var(--maroon-d);
+  font-family:'Oswald',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.td {
+  padding:14px 4px;
+  color:rgba(62,12,3,.4);
+}
+@keyframes tick {
+  from { transform:translateX(0); }
+  to { transform:translateX(-50%); }
+}
+@keyframes fUp {
+  from { opacity:0; transform:translateY(28px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+@media(max-width:1100px) {
+  nav { padding:0 28px; }
+  .hero-text { padding-inline:28px; }
+  .countdown {
+    left:56%;
+    width:min(440px, 46vw);
+    grid-template-columns:repeat(4, minmax(60px, 1fr));
+    gap:12px;
+    transform:translate(-34%, -42%);
+  }
+  .count-title {
+    font-size:24px;
+    letter-spacing:10px;
+  }
+  .count-title::before,
+  .count-title::after { width:34px; }
+  .count-unit { min-height:78px; }
+  .count-num {
+    width:56px;
+    min-height:42px;
+    font-size:28px;
+  }
+  .count-num::after {
+    left:calc(50% - 28px);
+    width:56px;
+  }
+  .launch-note { right:28px; }
+}
+
+@media(max-width:760px) {
+  nav {
+    height:78px;
+    padding:0 18px;
+  }
+  .nav-logo { gap:10px; }
+  .nav-logo img {
+    width:70px;
+    height:70px;
+  }
+  .nlm {
+    font-size:17px;
+    letter-spacing:.6px;
+  }
+  .nls {
+    font-size:7px;
+    letter-spacing:4px;
+  }
+  .nav-cta { display:none; }
+  .ticker-wrap { display:none; }
+  .hero-bg-img {
+    inset:0;
+    width:100%;
+    opacity:.58;
+  }
+  .hero-bg-img::before {
+    background:linear-gradient(to bottom, rgba(26,8,4,.96), rgba(26,8,4,.82));
+  }
+  .coming-hero {
+    display:block;
+    height:100vh;
+    height:100svh;
+    min-height:0;
+    padding:78px 0 0;
+  }
+  .hero-text {
+    width:100%;
+    padding:34px 18px 0;
+  }
+  .hero-eyebrow {
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .hero-eyebrow-line { width:34px; }
+  .hero-eyebrow span {
+    font-size:9px;
+    letter-spacing:4px;
+  }
+  .hero-h1 {
+    max-width:92vw;
+    font-size:clamp(42px,13.5vw,62px);
+    line-height:.88;
+  }
+  .hero-desc {
+    max-width:94vw;
+    margin:18px 0 20px;
+    font-size:13.5px;
+    line-height:1.5;
+  }
+  .hero-btns {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    max-width:100%;
+    margin-bottom:78px;
+  }
+  .hero-btns a {
+    width:100%;
+    max-width:none;
+    padding:13px 12px;
+    font-size:10px;
+    letter-spacing:2px;
+    text-align:center;
+  }
+  .launch-note { display:none; }
+  .countdown {
+    position:relative;
+    left:auto;
+    right:auto;
+    top:auto;
+    bottom:auto;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    width:calc(100% - 36px);
+    max-width:420px;
+    gap:6px;
+    margin:0 auto;
+    transform:none;
+  }
+  .count-title {
+    margin-bottom:2px;
+    font-size:clamp(18px, 5.8vw, 26px);
+    letter-spacing:6px;
+    padding-left:6px;
+  }
+  .count-date {
+    margin-top:-2px;
+    margin-bottom:3px;
+    font-size:10px;
+    letter-spacing:2.8px;
+  }
+  .count-title::before,
+  .count-title::after { display:none; }
+  .count-unit {
+    min-height:60px;
+    padding-bottom:16px;
+  }
+  .count-num {
+    width:44px;
+    min-height:34px;
+    border-radius:5px;
+    font-size:21px;
+  }
+  .count-num::after {
+    left:calc(50% - 22px);
+    width:44px;
+  }
+  .count-lbl {
+    bottom:4px;
+    font-size:6px;
+    letter-spacing:1.3px;
+  }
+}
+
+@media(max-width:380px) {
+  .hero-text { padding-top:22px; }
+  .hero-h1 { font-size:clamp(38px,13vw,50px); }
+  .hero-desc {
+    margin:14px 0 18px;
+    font-size:12.5px;
+    line-height:1.45;
+  }
+  .hero-btns a {
+    padding:11px 10px;
+    font-size:9px;
+  }
+  .hero-btns { margin-bottom:58px; }
+  .countdown {
+    width:calc(100% - 28px);
+    gap:4px;
+    margin-top:0;
+  }
+  .count-title {
+    font-size:16px;
+    letter-spacing:4px;
+  }
+  .count-date {
+    font-size:9px;
+    letter-spacing:2px;
+  }
+  .count-unit { min-height:54px; }
+  .count-num {
+    width:38px;
+    min-height:30px;
+    font-size:18px;
+  }
+  .count-num::after {
+    left:calc(50% - 19px);
+    width:38px;
+  }
+  .count-lbl { font-size:5.5px; letter-spacing:.8px; }
+}
+</style>
+</head>
+<body>
+  <nav aria-label="Primary">
+    <div class="nav-logo" aria-label="Sandwich Philosophy">
+      <img src="images/logo.png" alt="Sandwich Philosophy">
+      <span class="nav-logo-text">
+        <span class="nlm">SANDWICH PHILOSOPHY</span>
+        <span class="nls">Est. 2024 · Adelaide SA</span>
+      </span>
+    </div>
+    <a href="mailto:hello@sandwichphilosophy.com" class="nav-cta">Get Updates</a>
+  </nav>
+
+  <main class="coming-hero">
+    <div class="hero-bg-img" aria-hidden="true">
+      <img src="images/fried-chicken-sandwich.png" alt="">
+    </div>
+
+    <section class="hero-text" aria-labelledby="page-title">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span>First Adelaide outlet</span>
+      </div>
+      <h1 class="hero-h1" id="page-title">
+        <span class="line-gold">From Drops</span>
+        <span class="line-italic">To Doors</span>
+      </h1>
+      <p class="hero-desc">
+        The weekend drop is growing up. Sandwich Philosophy is opening its first
+        Adelaide restaurant: a permanent home for deliberate sandwiches, familiar
+        faces, and fresh experiments.
+      </p>
+      <div class="hero-btns" aria-label="Page actions">
+        <a href="mailto:hello@sandwichphilosophy.com" class="btn-amber"><span>Get Opening Updates</span></a>
+        <a href="tel:+61416944799" class="btn-ghost">Call Us</a>
+      </div>
+    </section>
+
+    <aside class="launch-note" aria-label="Launch note">
+      <strong>Next Chapter</strong>
+      From limited weekend batches to a real counter, real seats, and the first
+      Sandwich Philosophy home in Adelaide.
+    </aside>
+
+    <div class="countdown" aria-label="Countdown to opening on July 10, 2026">
+      <div class="count-title">Opening Soon</div>
+      <div class="count-date">July 10, 2026</div>
+      <div class="count-unit">
+        <div class="count-num" data-count="days">00</div>
+        <div class="count-lbl">Days</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" data-count="hours">00</div>
+        <div class="count-lbl">Hours</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" data-count="minutes">00</div>
+        <div class="count-lbl">Minutes</div>
+      </div>
+      <div class="count-unit">
+        <div class="count-num" data-count="seconds">00</div>
+        <div class="count-lbl">Seconds</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ti">First Adelaide Outlet</span><span class="td">/</span>
+      <span class="ti">Weekend Drops To Permanent Doors</span><span class="td">/</span>
+      <span class="ti">Restaurant Coming Soon</span><span class="td">/</span>
+      <span class="ti">The Philosophy Gets A Home</span><span class="td">/</span>
+      <span class="ti">First Adelaide Outlet</span><span class="td">/</span>
+      <span class="ti">Weekend Drops To Permanent Doors</span><span class="td">/</span>
+      <span class="ti">Restaurant Coming Soon</span><span class="td">/</span>
+      <span class="ti">The Philosophy Gets A Home</span><span class="td">/</span>
+    </div>
+  </div>
+  <script>
+    const openingTime = new Date('2026-07-10T00:00:00+09:30').getTime();
+    const countNodes = {
+      days: document.querySelector('[data-count="days"]'),
+      hours: document.querySelector('[data-count="hours"]'),
+      minutes: document.querySelector('[data-count="minutes"]'),
+      seconds: document.querySelector('[data-count="seconds"]')
+    };
+    function setCountdown() {
+      const remaining = Math.max(0, openingTime - Date.now());
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      countNodes.days.textContent = String(days).padStart(2, '0');
+      countNodes.hours.textContent = String(hours).padStart(2, '0');
+      countNodes.minutes.textContent = String(minutes).padStart(2, '0');
+      countNodes.seconds.textContent = String(seconds).padStart(2, '0');
+    }
+
+    setCountdown();
+    setInterval(setCountdown, 1000);
+  </script>
+</body>
+</html>

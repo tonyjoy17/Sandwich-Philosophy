@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandwich Philosophy — Est. 2024</title>
+<title>Sandwich Philosophy, Est. 2024</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Oswald:wght@300;400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
@@ -58,15 +60,17 @@ body::before {
 }
 #loader.done { opacity:0; visibility:hidden; }
 .loader-logo {
-  width:160px; height:160px;
-  animation:loaderSpin 2s ease-in-out infinite;
+  width:min(74vw, 420px);
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 18px 50px rgba(0,0,0,.38));
+  animation:loaderPulse 2.2s ease-in-out infinite;
 }
-@keyframes loaderSpin {
-  0%   { transform:rotate(0deg) scale(1); }
-  50%  { transform:rotate(180deg) scale(1.05); }
-  100% { transform:rotate(360deg) scale(1); }
+@keyframes loaderPulse {
+  0%, 100% { transform:scale(.985); opacity:.88; }
+  50%      { transform:scale(1.015); opacity:1; }
 }
-.loader-bar-wrap { width:200px; height:2px; background:rgba(184,116,14,.2); margin-top:32px; overflow:hidden; border-radius:2px; }
+.loader-bar-wrap { width:min(56vw, 260px); height:2px; background:rgba(184,116,14,.2); margin-top:32px; overflow:hidden; border-radius:2px; }
 .loader-bar { height:100%; background:var(--amber); width:0; animation:loadFill 2.2s ease forwards; }
 @keyframes loadFill { to { width:100%; } }
 .loader-text { font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:6px; text-transform:uppercase; color:rgba(240,236,229,.4); margin-top:14px; }
@@ -406,18 +410,6 @@ nav.scrolled {
 }
 .pill-amber { background:var(--amber); color:var(--maroon-d); }
 .pill-dark  { background:rgba(26,8,4,.85); color:var(--amber); border:1px solid rgba(184,116,14,.4); }
-
-/* Hover reveal text on image */
-.sc-img-hover {
-  position:absolute; bottom:28px; left:28px; right:28px; z-index:3;
-  opacity:0; transform:translateY(14px);
-  transition:opacity .4s,transform .4s;
-}
-.sig-card:hover .sc-img-hover { opacity:1; transform:translateY(0); }
-.sc-img-hover span {
-  font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase;
-  color:var(--amber-ll); border-bottom:1px solid rgba(232,176,64,.35); padding-bottom:3px;
-}
 
 /* ══════════════════════════════
    PROMISE / BELIEFS
@@ -1414,6 +1406,45 @@ nav.scrolled {
 .cta-h em { font-style:italic; color:var(--amber-l); }
 .cta-sub { font-size:16px; color:rgba(240,236,229,.55); font-weight:300; max-width:460px; margin:0 auto 50px; line-height:1.8; }
 .cta-actions { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+.order-platforms {
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.platform-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:50px;
+  padding:12px 22px;
+  background:rgba(240,236,229,.94);
+  border:1px solid rgba(184,116,14,.26);
+  color:var(--maroon-d);
+  text-decoration:none;
+  font-family:'Oswald',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  transition:transform .25s, box-shadow .25s, background .25s;
+  overflow:hidden;
+}
+.platform-btn:hover {
+  transform:translateY(-3px);
+  background:#fff;
+  box-shadow:0 16px 36px rgba(0,0,0,.22);
+}
+.platform-btn img {
+  width:auto;
+  max-width:92px;
+  height:24px;
+  object-fit:contain;
+  transform:scale(1.45);
+  transform-origin:center;
+}
+.platform-btn.doordash img { max-width:104px; }
 
 .hours-band {
   display:flex; justify-content:center; gap:0; flex-wrap:wrap;
@@ -1445,6 +1476,7 @@ footer {
 .fc ul { list-style:none; }
 .fc li { font-size:13px; color:rgba(240,236,229,.3); margin-bottom:10px; cursor:pointer; transition:color .3s; }
 .fc li:hover { color:var(--amber); }
+.fc a { color:inherit; text-decoration:none; }
 .footer-bottom {
   display:flex; justify-content:space-between; align-items:center;
   padding:22px 0; font-size:11px; color:rgba(240,236,229,.18); letter-spacing:1px;
@@ -1472,15 +1504,28 @@ footer {
    RESPONSIVE
 ══════════════════════════════ */
 @media(max-width:1100px){
-  nav { padding:0 28px; }
+  nav { padding:0 18px; height:64px; gap:12px; }
+  .nav-logo { gap:10px; min-width:0; }
+  .nav-logo img { width:40px; height:40px; flex:0 0 40px; }
+  .nav-logo-text { min-width:0; }
+  .nlm { font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .nls { font-size:7px; letter-spacing:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .nav-cta { padding:10px 18px; font-size:11px; letter-spacing:2px; white-space:nowrap; flex:0 0 auto; }
   .nav-links { display:none; }
   .hero-text { padding:110px 28px 70px; }
   .hero-stats { right:28px; bottom:40px; }
   .sig-intro { grid-template-columns:1fr; padding:80px 28px 0; }
   .sig-card { grid-template-columns:1fr !important; }
   .sig-card:nth-child(even) .sc-text, .sig-card:nth-child(even) .sc-img { order:unset; }
-  .sc-img { min-height:360px; padding:20px; }
-  .sc-text { padding:44px 28px; }
+  .sc-img { min-height:0; aspect-ratio:4/3; padding:22px 20px; }
+  .sc-img img { width:100%; height:100%; max-width:none; max-height:none; object-fit:cover; }
+  .sc-img::before { inset:10px; }
+  .sc-pill { top:12px; right:12px; font-size:9px; letter-spacing:2px; padding:7px 12px; }
+  .sc-text { padding:34px 28px 40px; }
+  .sc-text::before { inset:16px 12px; }
+  .sc-number { font-size:76px; margin-bottom:-16px; }
+  .sc-meta { flex-wrap:wrap; gap:12px 18px; margin-bottom:24px; }
+  .sc-btn { font-size:10px; letter-spacing:2px; padding:12px 18px; max-width:100%; }
   #beliefs { padding:80px 28px; }
   .beliefs-grid { grid-template-columns:1fr 1fr; }
   #more-menu { padding:80px 28px; }
@@ -1544,6 +1589,15 @@ footer {
 }
 @media(max-width:600px){
   .hero-h1 { font-size:clamp(48px,12vw,80px); }
+  nav { height:58px; }
+  .nav-logo img { width:36px; height:36px; flex-basis:36px; }
+  .nlm { font-size:13px; max-width:150px; }
+  .nls { display:none; }
+  .nav-cta { padding:9px 14px; font-size:10px; letter-spacing:1.8px; }
+  .sc-img { aspect-ratio:1/1; padding:16px; }
+  .sc-text { padding:30px 22px 36px; }
+  .sc-name { font-size:32px; }
+  .sc-reviews { display:block; width:100%; }
   .menu-group { padding:24px 18px; }
   .menu-grid { grid-template-columns:1fr; }
   .dessert-showcase { grid-template-columns:1fr; }
@@ -1567,26 +1621,17 @@ footer {
 
 <!-- ══ LOADER ══ -->
 <div id="loader">
-  <svg class="loader-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="100" r="90" fill="none" stroke="#B8740E" stroke-width="2"/>
-    <circle cx="100" cy="100" r="82" fill="none" stroke="#D4960A" stroke-width="1"/>
-    <path d="M 30 70 A 80 80 0 0 1 170 70" fill="none" stroke="#B8740E" stroke-width="3" stroke-linecap="round"/>
-    <path d="M 24 130 A 88 88 0 0 0 176 130" fill="none" stroke="#B8740E" stroke-width="3" stroke-linecap="round"/>
-    <text x="100" y="115" text-anchor="middle" font-family="serif" font-size="44" font-weight="900" fill="#5C1205">SP</text>
-    <text x="100" y="62" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#B8740E" letter-spacing="5" font-weight="700">EST · 2024</text>
-    <text x="100" y="150" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#B8740E" letter-spacing="8" font-weight="700">PHILOSOPHY</text>
-  </svg>
+  <img class="loader-logo" src="images/SP RGB Primary Dark Backgrounds.png" alt="Sandwich Philosophy">
   <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
   <div class="loader-text">Loading Philosophy...</div>
 </div>
-
 <!-- ══ NAV ══ -->
 <nav id="nav">
   <div class="nav-logo">
     <img src="images/logo.png" alt="Sandwich Philosophy Logo">
     <div class="nav-logo-text">
       <div class="nlm">Sandwich Philosophy</div>
-      <div class="nls">Now Open · Welland SA</div>
+      <div class="nls">Now Open in Welland SA</div>
     </div>
   </div>
   <ul class="nav-links">
@@ -1594,6 +1639,7 @@ footer {
     <li><a href="#philosophy">Story</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#reviews">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="#cta" class="nav-cta">Order Now</a>
 </nav>
@@ -1603,7 +1649,7 @@ footer {
   <canvas id="heroCanvas"></canvas>
 
   <div class="hero-bg-img">
-    <img src="images/double-animal-burger.png" alt="The Benchmark">
+    <img src="images/Sandwich philosophy_Hero_2880x2304.jpg" alt="Sandwich Philosophy menu hero">
   </div>
 
   <div class="hero-text">
@@ -1626,7 +1672,7 @@ footer {
 
   <div class="hero-stats">
     <div class="hs"><div class="hs-num">5.0★</div><div class="hs-lbl">Google Rating</div></div>
-    <div class="hs"><div class="hs-num">10+</div><div class="hs-lbl">Featured Items</div></div>
+    <div class="hs"><div class="hs-num">24+</div><div class="hs-lbl">Menu Items</div></div>
     <div class="hs"><div class="hs-num">100%</div><div class="hs-lbl">Local SA</div></div>
   </div>
 
@@ -1645,7 +1691,7 @@ footer {
     <span class="ti">The Crunch Theory</span><span class="td">✦</span>
     <span class="ti">The Loaded Theory</span><span class="td">✦</span>
     <span class="ti">The Big Bite</span><span class="td">✦</span>
-    <span class="ti">508-514 Port Rd, Welland SA</span><span class="td">✦</span>
+    <span class="ti">Shop 23A/508-514 Port Rd, Welland SA</span><span class="td">✦</span>
     <span class="ti">Est. 2024</span><span class="td">✦</span>
     <span class="ti">Now Open Daily Except Tuesday</span><span class="td">✦</span>
     <span class="ti">The Benchmark</span><span class="td">✦</span>
@@ -1654,7 +1700,7 @@ footer {
     <span class="ti">The Crunch Theory</span><span class="td">✦</span>
     <span class="ti">The Loaded Theory</span><span class="td">✦</span>
     <span class="ti">The Big Bite</span><span class="td">✦</span>
-    <span class="ti">508-514 Port Rd, Welland SA</span><span class="td">✦</span>
+    <span class="ti">Shop 23A/508-514 Port Rd, Welland SA</span><span class="td">✦</span>
     <span class="ti">Est. 2024</span><span class="td">✦</span>
     <span class="ti">Now Open Daily Except Tuesday</span><span class="td">✦</span>
   </div>
@@ -1668,7 +1714,7 @@ footer {
       <h2 class="s-title">Three Reasons<br><em>to Come Back.</em></h2>
     </div>
     <div class="sig-intro-right reveal rd2">
-      <p>These are the signatures that define Sandwich Philosophy: smashed beef burgers built with serious intent, loaded with personality, and supported by sides, sauces, drinks and tacos that carry the same energy.</p>
+      <p>These are the signatures that define Sandwich Philosophy: smashed beef burgers and crisp chicken sandwiches built with serious intent, then supported by tacos, sauces and drinks that carry the same energy.</p>
     </div>
   </div>
 
@@ -1678,24 +1724,23 @@ footer {
     <div class="sig-card reveal">
       <div class="sc-text">
         <div class="sc-number">01</div>
-        <div class="sc-tag">Signature · Double Beef</div>
+        <div class="sc-tag">Signature Double Beef</div>
         <h3 class="sc-name">The Benchmark</h3>
         <div class="sc-aka">AKA Classic Cheeseburger</div>
-        <p class="sc-desc">Two smashed beef patties, melted American cheese, pickles, shredded lettuce and secret sauce on a soft toasted brioche bun. The benchmark every cheeseburger should be judged against.</p>
+        <p class="sc-desc">Two premium smashed beef patties cooked to perfection with melted American cheese, crisp lettuce and our signature house sauce on a soft toasted brioche bun. A timeless classic, perfected.</p>
         <div class="sc-meta">
-          <span class="sc-price">$15.75</span>
+          <span class="sc-price">$15</span>
           <div>
             <div class="sc-stars">★★★★★</div>
-            <div class="sc-reviews">12 Google Reviews · 5.0</div>
+            <div class="sc-reviews">12 Google Reviews, 5.0</div>
           </div>
         </div>
-        <a href="#" class="sc-btn"><span>Add to Order →</span></a>
+        <a href="#cta" class="sc-btn"><span>Add to Order →</span></a>
       </div>
       <div class="sc-img">
         <div class="sc-pill pill-amber">Most Ordered</div>
         <div class="sc-img-overlay"></div>
-        <img src="images/double-animal-burger.png" alt="The Benchmark">
-        <div class="sc-img-hover"><span>Order The Benchmark →</span></div>
+        <img src="images/Sandwich philosophy_Classic CheeseBurger_2880x2304.jpg" alt="The Benchmark">
       </div>
     </div>
 
@@ -1703,49 +1748,47 @@ footer {
     <div class="sig-card reveal rd1">
       <div class="sc-text">
         <div class="sc-number">02</div>
-        <div class="sc-tag">Signature · Oklahoma Smash</div>
+        <div class="sc-tag">Signature Oklahoma Smash</div>
         <h3 class="sc-name">The Existential Onion</h3>
         <div class="sc-aka">AKA Oklahoma Smash Burger</div>
-        <p class="sc-desc">Two smashed beef patties grilled with a generous layer of thinly sliced onions, caramelised directly into the beef, topped with melted American cheese, pickles and our signature sauce on a soft toasted brioche bun.</p>
+        <p class="sc-desc">Thinly sliced onions smashed directly into two premium beef patties as they sear, creating deep caramelised flavour. Finished with American cheese, crunchy pickles and signature sauce.</p>
         <div class="sc-meta">
-          <span class="sc-price">$18.90</span>
+          <span class="sc-price">$18</span>
           <div>
             <div class="sc-stars">★★★★★</div>
-            <div class="sc-reviews">12 Google Reviews · 5.0</div>
+            <div class="sc-reviews">12 Google Reviews, 5.0</div>
           </div>
         </div>
-        <a href="#" class="sc-btn"><span>Add to Order →</span></a>
+        <a href="#cta" class="sc-btn"><span>Add to Order →</span></a>
       </div>
       <div class="sc-img">
         <div class="sc-pill pill-dark">Fan Favourite</div>
         <div class="sc-img-overlay"></div>
-        <img src="images/existential-onion.png" alt="The Existential Onion">
-        <div class="sc-img-hover"><span>Order The Existential Onion →</span></div>
+        <img src="images/Sandwich philosophy_Oklahoma Onion Burger_2880x2304.jpg" alt="The Existential Onion">
       </div>
     </div>
 
-    <!-- HOT TAKE -->
+    <!-- RED LINE -->
     <div class="sig-card reveal rd2">
       <div class="sc-text">
         <div class="sc-number">03</div>
-        <div class="sc-tag">Spicy · Jalapeno Smash</div>
-        <h3 class="sc-name">The Hot Take</h3>
-        <div class="sc-aka">AKA Jalapeno Burger</div>
-        <p class="sc-desc">Fresh jalapenos smashed directly into our premium beef patties as they cook, creating bold flavour in every bite. Topped with melted American cheese and our signature house sauce on a toasted brioche bun.</p>
+        <div class="sc-tag">Crispy Buffalo Chicken</div>
+        <h3 class="sc-name">The Red Line</h3>
+        <div class="sc-aka">AKA Buffalo Fried Chicken Sandwich</div>
+        <p class="sc-desc">Golden crispy fried chicken tossed in bold buffalo sauce, layered with creamy coleslaw and cool ranch dressing on a toasted brioche bun. Crunch, heat and creaminess in balance.</p>
         <div class="sc-meta">
-          <span class="sc-price">$21.00</span>
+          <span class="sc-price">$17</span>
           <div>
             <div class="sc-stars">★★★★★</div>
-            <div class="sc-reviews">12 Google Reviews · 5.0</div>
+            <div class="sc-reviews">12 Google Reviews, 5.0</div>
           </div>
         </div>
-        <a href="#" class="sc-btn"><span>Add to Order →</span></a>
+        <a href="#cta" class="sc-btn"><span>Add to Order →</span></a>
       </div>
       <div class="sc-img">
-        <div class="sc-pill pill-amber" style="background:var(--maroon);color:var(--amber-ll);border:1px solid rgba(184,116,14,.4);">New</div>
+        <div class="sc-pill pill-amber" style="background:var(--maroon);color:var(--amber-ll);border:1px solid rgba(184,116,14,.4);">Chicken</div>
         <div class="sc-img-overlay"></div>
-        <img src="images/onion-burger.png" alt="The Hot Take">
-        <div class="sc-img-hover"><span>Order The Hot Take →</span></div>
+        <img src="images/Sandwich philosophy_Buffalo Chicken Sandwich_2880x2304.jpg" alt="The Red Line">
       </div>
     </div>
 
@@ -1766,12 +1809,12 @@ footer {
     </article>
     <article class="belief-card reveal rd1">
       <div class="belief-mark">Fresh</div>
-      <h3>Small-Batch Freshness</h3>
+      <h3>Small Batch Freshness</h3>
       <p>Our food is handmade, fresh and deliberate. We keep the prep focused, the batches controlled, and every order built with the same attention to detail.</p>
     </article>
     <article class="belief-card reveal rd2">
       <div class="belief-mark">Craft</div>
-      <h3>Chef-Crafted Creativity</h3>
+      <h3>Chef Crafted Creativity</h3>
       <p>Each item is personally designed, tested and made by Shams. If it's not good enough for us, it doesn't go on your plate.</p>
     </article>
     <article class="belief-card reveal rd3">
@@ -1797,9 +1840,10 @@ footer {
   <div class="menu-tabs reveal">
     <button class="menu-tab active" data-filter="all">All Items</button>
     <button class="menu-tab" data-filter="beef">Beef Burgers</button>
-    <button class="menu-tab" data-filter="sides">Sides &amp; Sauces</button>
-    <button class="menu-tab" data-filter="drinks">Drinks</button>
+    <button class="menu-tab" data-filter="chicken">Chicken</button>
     <button class="menu-tab" data-filter="tacos">Tacos</button>
+    <button class="menu-tab" data-filter="sides">Sides</button>
+    <button class="menu-tab" data-filter="drinks">Drinks</button>
   </div>
 
   <!-- ── CAROUSEL ── -->
@@ -1809,14 +1853,14 @@ footer {
       <div class="cr-card" data-cat="beef">
         <div class="cr-img">
           <div class="cr-pill amber">Most Ordered</div>
-          <img src="images/double-animal-burger.png" alt="The Benchmark">
-          <div class="cr-price">$15.75</div>
+          <img src="images/Sandwich philosophy_Classic CheeseBurger_2880x2304.jpg" alt="The Benchmark">
+          <div class="cr-price">$15</div>
         </div>
         <div class="cr-body">
-          <div class="cr-kicker">Double Beef &middot; Classic</div>
+          <div class="cr-kicker">Double Beef Classic</div>
           <div class="cr-name">The Benchmark</div>
           <div class="cr-aka">AKA Classic Cheeseburger</div>
-          <p class="cr-desc">Two smashed beef patties, melted American cheese, pickles, shredded lettuce and secret sauce on a soft toasted brioche bun. The benchmark every cheeseburger should be judged against.</p>
+          <p class="cr-desc">Two premium smashed beef patties cooked to perfection with melted American cheese, crisp lettuce and our signature house sauce on a soft toasted brioche bun. A timeless classic, perfected.</p>
           <a href="#cta" class="cr-order"><span>Order &rarr;</span></a>
         </div>
       </div>
@@ -1824,14 +1868,14 @@ footer {
       <div class="cr-card" data-cat="beef">
         <div class="cr-img">
           <div class="cr-pill dark">Oklahoma Smash</div>
-          <img src="images/existential-onion.png" alt="The Existential Onion">
-          <div class="cr-price">$18.90</div>
+          <img src="images/Sandwich philosophy_Oklahoma Onion Burger_2880x2304.jpg" alt="The Existential Onion">
+          <div class="cr-price">$18</div>
         </div>
         <div class="cr-body">
-          <div class="cr-kicker">Smashed Onion &middot; Signature</div>
+          <div class="cr-kicker">Smashed Onion Signature</div>
           <div class="cr-name">The Existential Onion</div>
           <div class="cr-aka">AKA Oklahoma Smash Burger</div>
-          <p class="cr-desc">Two smashed beef patties grilled with thinly sliced onions caramelised directly into the beef, topped with melted American cheese, pickles and our signature sauce on a toasted brioche bun.</p>
+          <p class="cr-desc">Thinly sliced onions smashed directly into two premium beef patties as they sear, creating deep caramelised flavour. Finished with melted American cheese, crunchy pickles and signature sauce.</p>
           <a href="#cta" class="cr-order"><span>Order &rarr;</span></a>
         </div>
       </div>
@@ -1839,14 +1883,44 @@ footer {
       <div class="cr-card" data-cat="beef">
         <div class="cr-img">
           <div class="cr-pill amber">Spicy</div>
-          <img src="images/onion-burger.png" alt="The Hot Take">
-          <div class="cr-price">$21.00</div>
+          <img src="images/Sandwich philosophy_Jalepeno Burger_2880x2304.jpg" alt="The Hot Take">
+          <div class="cr-price">$20</div>
         </div>
         <div class="cr-body">
-          <div class="cr-kicker">Jalapeno Smash &middot; Bold</div>
+          <div class="cr-kicker">Jalapeno Smash Bold</div>
           <div class="cr-name">The Hot Take</div>
           <div class="cr-aka">AKA Jalapeno Burger</div>
-          <p class="cr-desc">Fresh jalapenos smashed directly into our premium beef patties as they cook, creating bold flavour in every bite. Topped with melted American cheese and our signature house sauce on a toasted brioche bun.</p>
+          <p class="cr-desc">Fresh jalapenos smashed directly into our premium beef patties as they cook. Topped with melted American cheese on a toasted brioche bun, served with crunchy pickles and signature sauce on the side.</p>
+          <a href="#cta" class="cr-order"><span>Order &rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="chicken">
+        <div class="cr-img">
+          <div class="cr-pill amber">Karaage</div>
+          <img src="images/Sandwich philosophy_Chicken Karage Sandwich_2880x2304.jpg" alt="The Rebel">
+          <div class="cr-price">$18</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Japanese Style Chicken</div>
+          <div class="cr-name">The Rebel</div>
+          <div class="cr-aka">AKA Chicken Karaage Sandwich</div>
+          <p class="cr-desc">Japanese style crispy chicken karaage topped with creamy coleslaw and Japanese mayo, served on a soft toasted brioche bun. Light, crispy and packed with umami flavour.</p>
+          <a href="#cta" class="cr-order"><span>Order &rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="cr-card" data-cat="chicken">
+        <div class="cr-img">
+          <div class="cr-pill dark">Buffalo</div>
+          <img src="images/Sandwich philosophy_Buffalo Chicken Sandwich_2880x2304.jpg" alt="The Red Line">
+          <div class="cr-price">$17</div>
+        </div>
+        <div class="cr-body">
+          <div class="cr-kicker">Fried Chicken Heat</div>
+          <div class="cr-name">The Red Line</div>
+          <div class="cr-aka">AKA Buffalo Fried Chicken Sandwich</div>
+          <p class="cr-desc">Golden crispy fried chicken tossed in our bold buffalo sauce, layered with creamy coleslaw and cool ranch dressing on a toasted brioche bun. Crunch, heat and creaminess in balance.</p>
           <a href="#cta" class="cr-order"><span>Order &rarr;</span></a>
         </div>
       </div>
@@ -1854,7 +1928,7 @@ footer {
       <div class="cr-card" data-cat="sides">
         <div class="cr-img">
           <div class="cr-pill amber">Side</div>
-          <img src="images/patty-melt.png" alt="The Crunch Theory">
+          <img src="images/Sandwich philosophy_Into The Crunch_2880x2304.jpg" alt="The Crunch Theory">
           <div class="cr-price">$8.40</div>
         </div>
         <div class="cr-body">
@@ -1869,96 +1943,66 @@ footer {
       <div class="cr-card" data-cat="sides">
         <div class="cr-img">
           <div class="cr-pill dark">Loaded</div>
-          <img src="images/double-animal-burger.png" alt="The Loaded Theory">
+          <img src="images/Sandwich philosophy_Loaded Theory_2880x2304.jpg" alt="The Loaded Theory">
           <div class="cr-price">$15.75</div>
         </div>
         <div class="cr-body">
           <div class="cr-kicker">Loaded Fries</div>
           <div class="cr-name">The Loaded Theory</div>
           <div class="cr-aka">AKA Animal Fries</div>
-          <p class="cr-desc">Golden crispy fries topped with seasoned premium minced beef, grilled onions and our signature secret sauce. A bold, hearty twist on a street-food favourite.</p>
+          <p class="cr-desc">Golden crispy fries topped with seasoned premium minced beef, grilled onions and our signature secret sauce. A bold, hearty twist on a street food favourite.</p>
           <a href="#cta" class="cr-order"><span>Order &rarr;</span></a>
         </div>
       </div>
 
-      <div class="cr-card" data-cat="sides">
-        <div class="cr-img"><div class="cr-pill amber">Sauce</div><img src="images/logo.png" alt="Secret Sauce"><div class="cr-price">$3.15</div></div>
-        <div class="cr-body"><div class="cr-kicker">House Sauce</div><div class="cr-name">Secret Sauce</div><div class="cr-aka">Signature house-made sauce</div><p class="cr-desc">Our signature house-made sauce, crafted from a balanced blend of creamy mayo, tangy pickles, mustard and our own special seasoning. Rich, savoury and unmistakably Sandwich Philosophy.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
-      </div>
-
-      <div class="cr-card" data-cat="sides">
-        <div class="cr-img"><div class="cr-pill dark">Sauce</div><img src="images/logo.png" alt="Siracha Mayo"><div class="cr-price">$3.15</div></div>
-        <div class="cr-body"><div class="cr-kicker">Spicy Mayo</div><div class="cr-name">Siracha Mayo</div><div class="cr-aka">Creamy sriracha sauce</div><p class="cr-desc">Smooth, creamy mayonnaise blended with authentic sriracha for the perfect combination of richness and spicy heat. A bold, flavour-packed sauce that elevates every bite.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
-      </div>
-
-      <div class="cr-card" data-cat="sides">
-        <div class="cr-img"><div class="cr-pill dark">Sauce</div><img src="images/logo.png" alt="Green Mayo"><div class="cr-price">$3.15</div></div>
-        <div class="cr-body"><div class="cr-kicker">Herb Mayo</div><div class="cr-name">Green Mayo</div><div class="cr-aka">Fresh herb sauce</div><p class="cr-desc">A creamy, herb-infused mayonnaise blended with fresh herbs, garlic and spices for a smooth, vibrant flavour. Fresh, tangy and perfectly balanced for burgers, fries and tacos.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
-      </div>
-
-      <div class="cr-card" data-cat="sides">
-        <div class="cr-img"><div class="cr-pill dark">Sauce</div><img src="images/logo.png" alt="Chipotle Mayo"><div class="cr-price">$3.15</div></div>
-        <div class="cr-body"><div class="cr-kicker">Smoky Mayo</div><div class="cr-name">Chipotle Mayo</div><div class="cr-aka">Smoky chipotle sauce</div><p class="cr-desc">A rich and creamy mayonnaise infused with smoky chipotle peppers, delivering a bold, smoky flavour with a gentle kick of heat. Perfect for burgers, sandwiches and loaded fries.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
-      </div>
-
-      <div class="cr-card" data-cat="sides">
-        <div class="cr-img"><div class="cr-pill dark">Sauce</div><img src="images/logo.png" alt="Ranch Sauce"><div class="cr-price">$3.15</div></div>
-        <div class="cr-body"><div class="cr-kicker">Creamy Ranch</div><div class="cr-name">Ranch Sauce</div><div class="cr-aka">Buttermilk herb sauce</div><p class="cr-desc">A cool, creamy ranch made with buttermilk, herbs, garlic, onion and cracked black pepper. Fresh, smooth and full of flavour for chicken, fries and burgers.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
-      </div>
-
-      <div class="cr-card" data-cat="sides">
-        <div class="cr-img"><div class="cr-pill dark">Sauce</div><img src="images/logo.png" alt="Honey Mustard"><div class="cr-price">$3.15</div></div>
-        <div class="cr-body"><div class="cr-kicker">Sweet Mustard</div><div class="cr-name">Honey Mustard</div><div class="cr-aka">Sweet and tangy sauce</div><p class="cr-desc">A delicious blend of sweet honey and tangy mustard, creating the perfect balance of sweetness and zest for fries, burgers, tacos and dipping.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+      <div class="cr-card" data-cat="drinks">
+        <div class="cr-img"><div class="cr-pill dark">Drink</div><img src="images/logo.png" alt="Water"><div class="cr-price">$2</div></div>
+        <div class="cr-body"><div class="cr-kicker">Still Water</div><div class="cr-name">Water</div><div class="cr-aka">Chilled bottle</div><p class="cr-desc">Pure, chilled bottled water to keep you refreshed and hydrated with every meal.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="drinks">
-        <div class="cr-img"><div class="cr-pill dark">Drink</div><img src="images/logo.png" alt="Water 600 ML"><div class="cr-price">$2.10</div></div>
-        <div class="cr-body"><div class="cr-kicker">Still Water</div><div class="cr-name">Water 600 ML</div><div class="cr-aka">600 ml bottle</div><p class="cr-desc">Cold bottled water, simple and refreshing. The clean reset between burgers, fries, sauces and tacos.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill dark">Drink</div><img src="images/Sandwich philosophy_Kinza_2880x2304.jpg" alt="Kinza"><div class="cr-price">$2</div></div>
+        <div class="cr-body"><div class="cr-kicker">Sparkling Soft Drink</div><div class="cr-name">Kinza</div><div class="cr-aka">Assorted flavours</div><p class="cr-desc">A refreshing sparkling soft drink available in a variety of vibrant flavours. Light, crisp and perfectly chilled to complement every meal.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="drinks">
-        <div class="cr-img"><div class="cr-pill dark">Drink</div><img src="images/logo.png" alt="Kinza"><div class="cr-price">$2.10</div></div>
-        <div class="cr-body"><div class="cr-kicker">Sparkling Soft Drink</div><div class="cr-name">Kinza</div><div class="cr-aka">Assorted flavours</div><p class="cr-desc">Refreshing sparkling soft drink available in a range of delicious flavours.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill amber">Mexican Soda</div><img src="images/Sandwich philosophy_Jarritos_2880x2304.jpg" alt="Jarritos"><div class="cr-price">$6</div></div>
+        <div class="cr-body"><div class="cr-kicker">Real Fruit Flavours</div><div class="cr-name">Jarritos</div><div class="cr-aka">Authentic Mexican soda</div><p class="cr-desc">Authentic Mexican soda made with real fruit flavours and natural cane sugar. Bright, refreshing and the perfect companion to burgers, tacos and loaded fries.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="drinks">
-        <div class="cr-img"><div class="cr-pill amber">Mexican Soda</div><img src="images/logo.png" alt="Jarritos"><div class="cr-price">$6.30</div></div>
-        <div class="cr-body"><div class="cr-kicker">Real Fruit Flavours</div><div class="cr-name">Jarritos</div><div class="cr-aka">Authentic Mexican soda</div><p class="cr-desc">Authentic Mexican soda made with real fruit flavours, delivering a crisp, refreshing taste that pairs perfectly with burgers, tacos and fries.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
-      </div>
-
-      <div class="cr-card" data-cat="drinks">
-        <div class="cr-img"><div class="cr-pill dark">Drink</div><img src="images/logo.png" alt="Salam Cola"><div class="cr-price">$4.20</div></div>
-        <div class="cr-body"><div class="cr-kicker">Cola</div><div class="cr-name">Salam Cola</div><div class="cr-aka">Chilled soft drink</div><p class="cr-desc">A cold, crisp cola made to sit beside a hot burger, a tray of fries or a round of tacos.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill dark">Drink</div><img src="images/Sandwich philosophy_Salaam_2880x2304.jpg" alt="Salam Cola"><div class="cr-price">$4</div></div>
+        <div class="cr-body"><div class="cr-kicker">Cola &amp; Fruit Flavours</div><div class="cr-name">Salam Cola</div><div class="cr-aka">Premium soft drink</div><p class="cr-desc">A premium range of refreshing soft drinks available in classic cola and delicious fruit flavours. Crisp, fizzy and made to complement every bite.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="tacos">
-        <div class="cr-img"><div class="cr-pill amber">Taco</div><img src="images/shawarma.png" alt="The Foundation"><div class="cr-price">$5.25</div></div>
-        <div class="cr-body"><div class="cr-kicker">Beef Taco</div><div class="cr-name">The Foundation</div><div class="cr-aka">Seasoned beef taco</div><p class="cr-desc">A warm tortilla filled with seasoned premium beef, fresh pico de gallo and our signature sauce. Fresh, flavourful and made to order.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill amber">Taco</div><img src="images/Sandwich philosophy_Cheesy Beef Taco_2880x2304.jpg" alt="Beef Taco"><div class="cr-price">$5</div></div>
+        <div class="cr-body"><div class="cr-kicker">Seasoned Beef</div><div class="cr-name">Beef Taco</div><div class="cr-aka">Fresh pico de gallo</div><p class="cr-desc">A warm tortilla filled with seasoned premium beef, fresh pico de gallo and our signature sauce. Fresh, flavourful and made to order.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="tacos">
-        <div class="cr-img"><div class="cr-pill dark">Trio</div><img src="images/shawarma.png" alt="The Foundation Trio"><div class="cr-price">$14.70</div></div>
-        <div class="cr-body"><div class="cr-kicker">Three Beef Tacos</div><div class="cr-name">The Foundation Trio</div><div class="cr-aka">Triple taco serve</div><p class="cr-desc">Three handcrafted beef tacos loaded with seasoned premium beef, fresh pico de gallo and our signature sauce. The perfect choice for taco lovers.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill dark">Trio</div><img src="images/Sandwich philosophy_Cheesy Beef Taco_2880x2304.jpg" alt="Beef Taco Trio"><div class="cr-price">$14</div></div>
+        <div class="cr-body"><div class="cr-kicker">Three Beef Tacos</div><div class="cr-name">Beef Taco Trio</div><div class="cr-aka">Triple taco serve</div><p class="cr-desc">Three handcrafted beef tacos loaded with seasoned premium beef, fresh pico de gallo and our signature sauce. The perfect choice for taco lovers.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="tacos">
-        <div class="cr-img"><div class="cr-pill amber">Birria Style</div><img src="images/shawarma.png" alt="The Obsession"><div class="cr-price">$9.45</div></div>
-        <div class="cr-body"><div class="cr-kicker">Braised Beef</div><div class="cr-name">The Obsession</div><div class="cr-aka">Consomme dipping taco</div><p class="cr-desc">Slow-braised premium beef simmered for hours in Mexican chillies, layered with melted Mexican cheese blend inside a flour tortilla, drizzled with green mayo and served with consomme for dipping.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill amber">Birria Style</div><img src="images/Sandwich philosophy_Birria Taco_2880x2304.jpg" alt="Birria Tacos Single"><div class="cr-price">$9</div></div>
+        <div class="cr-body"><div class="cr-kicker">Slow Braised Beef</div><div class="cr-name">Birria Tacos Single</div><div class="cr-aka">Consomme dipping taco</div><p class="cr-desc">Slow braised premium beef simmered for hours in Mexican chiles, layered with melted Mexican cheese blend inside a grilled tortilla, drizzled with green mayo and served with consomme.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="tacos">
-        <div class="cr-img"><div class="cr-pill dark">Duo</div><img src="images/shawarma.png" alt="The Obsession Duo"><div class="cr-price">$16.80</div></div>
-        <div class="cr-body"><div class="cr-kicker">Braised Beef Duo</div><div class="cr-name">The Obsession Duo</div><div class="cr-aka">Two consomme dipping tacos</div><p class="cr-desc">Slow-braised premium beef simmered for hours in Mexican spices, layered with melted mozzarella inside a grilled tortilla and served with our signature consomme for the ultimate dipping experience.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill dark">Duo</div><img src="images/Sandwich philosophy_Birria Taco_2880x2304.jpg" alt="Birria Tacos Duo"><div class="cr-price">$16</div></div>
+        <div class="cr-body"><div class="cr-kicker">Two Golden Tortillas</div><div class="cr-name">Birria Tacos Duo</div><div class="cr-aka">Consomme dipping tacos</div><p class="cr-desc">Two golden grilled tortillas packed with slow braised premium beef, Mexican chiles and melted Mexican cheese blend, drizzled with green mayo and served with consomme.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="tacos">
-        <div class="cr-img"><div class="cr-pill amber">Cheesy</div><img src="images/shawarma.png" alt="The Overload"><div class="cr-price">$6.30</div></div>
-        <div class="cr-body"><div class="cr-kicker">Beef &amp; Cheese</div><div class="cr-name">The Overload</div><div class="cr-aka">Cheesy grilled tortilla</div><p class="cr-desc">Seasoned premium beef and generous melted Mexican cheese blend folded into a grilled tortilla, finished with fresh pico de gallo and our signature green mayo for the perfect cheesy bite.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill amber">Cheesy</div><img src="images/Sandwich philosophy_Cheesy Beef Taco_2880x2304.jpg" alt="Cheesy Beef Taco"><div class="cr-price">$6</div></div>
+        <div class="cr-body"><div class="cr-kicker">Beef &amp; Cheese</div><div class="cr-name">Cheesy Beef Taco</div><div class="cr-aka">Grilled tortilla</div><p class="cr-desc">Seasoned premium beef and generous melted Mexican cheese blend folded into a grilled tortilla, finished with fresh pico de gallo and our signature sauce for the perfect cheesy bite.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
 
       <div class="cr-card" data-cat="tacos">
-        <div class="cr-img"><div class="cr-pill dark">Trio</div><img src="images/shawarma.png" alt="The Overload Trio"><div class="cr-price">$16.80</div></div>
-        <div class="cr-body"><div class="cr-kicker">Beef &amp; Cheese Trio</div><div class="cr-name">The Overload Trio</div><div class="cr-aka">Three cheesy grilled tortillas</div><p class="cr-desc">Seasoned premium beef and generous melted Mexican cheese blend folded into grilled tortillas, finished with fresh pico de gallo and our signature green mayo for the perfect cheesy bite.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
+        <div class="cr-img"><div class="cr-pill dark">Trio</div><img src="images/Sandwich philosophy_Cheesy Beef Taco_2880x2304.jpg" alt="Cheesy Beef Taco Trio"><div class="cr-price">$16</div></div>
+        <div class="cr-body"><div class="cr-kicker">Cheesy Beef Trio</div><div class="cr-name">Cheesy Beef Taco Trio</div><div class="cr-aka">Three grilled tacos</div><p class="cr-desc">Three grilled cheesy beef tacos loaded with seasoned premium beef, Mexican cheese blend, fresh pico de gallo and our signature sauce. Crispy, cheesy and bold.</p><a href="#cta" class="cr-order"><span>Order &rarr;</span></a></div>
       </div>
     </div><!-- /menu-carousel -->
   </div><!-- /menu-carousel-wrap -->
@@ -1980,7 +2024,7 @@ footer {
           <div class="menu-group-kicker">Sweet Conclusion</div>
           <h3 class="menu-group-title">The Sweet <em>Finish.</em></h3>
         </div>
-        <p class="menu-group-copy">Fresh-baked and made to linger. Every dessert is the closing argument — warm, nostalgic, and impossible to walk away from.</p>
+        <p class="menu-group-copy">Fresh baked and made to linger. Every dessert is the closing argument: warm, nostalgic, and impossible to walk away from.</p>
       </div>
       <div class="dessert-showcase">
 
@@ -1993,7 +2037,7 @@ footer {
             <div class="d-kicker">NYC Cookie</div>
             <div class="d-name">The Big Bite</div>
             <div class="d-aka">AKA NYC Cookie</div>
-            <p class="d-desc">Thick, chunky, and soft-baked with molten pockets of chocolate. Crisp at the edges, gooey at the centre. Big enough to share — too good to.</p>
+            <p class="d-desc">Thick, chunky, and soft baked with molten pockets of chocolate. Crisp at the edges, gooey at the centre. Big enough to share, too good to.</p>
             <a href="#cta" class="d-order"><span>Add to Order →</span></a>
           </div>
         </div>
@@ -2018,10 +2062,10 @@ footer {
             <div class="d-price-badge">$7</div>
           </div>
           <div class="d-body">
-            <div class="d-kicker">Basbousa · Middle Eastern</div>
+      <div class="d-kicker">Basbousa Middle Eastern</div>
             <div class="d-name">The Golden Debate</div>
             <div class="d-aka">AKA Basbousa</div>
-            <p class="d-desc">Golden semolina cake soaked in fragrant syrup. Sweet, nutty, quietly rich — a timeless bite that needs no justification.</p>
+      <p class="d-desc">Golden semolina cake soaked in fragrant syrup. Sweet, nutty and quietly rich, a timeless bite that needs no justification.</p>
             <a href="#cta" class="d-order"><span>Add to Order →</span></a>
           </div>
         </div>
@@ -2037,15 +2081,15 @@ footer {
   <div class="phil-dark reveal-left">
     <div class="s-eyebrow">Who We Are</div>
     <h2 class="s-title">No Sandwich<br>Has <em>Small<br>Decisions.</em></h2>
-    <p>We started Sandwich Philosophy in 2024 with one belief: the sandwich deserves the same serious attention that any great restaurant gives to any great dish. Every element — the bread, the sauce, the sequence of the layers — matters.</p>
+      <p>We started Sandwich Philosophy in 2024 with one belief: the sandwich deserves the same serious attention that any great restaurant gives to any great dish. Every element matters, from the bread to the sauce to the sequence of the layers.</p>
     <p>We source locally because it tastes better, not because it's trendy. We make things by hand because shortcuts show. And we name our sandwiches after ideas, because great food should make you feel something beyond just full.</p>
   </div>
   <div class="phil-light">
     <div class="phil-light-img">
-      <img src="images/existential-onion.png" alt="The Existential Onion">
+      <img src="images/Sandwich philosophy_Oklahoma Onion Burger_2880x2304.jpg" alt="The Existential Onion">
     </div>
     <div class="phil-stats reveal-right">
-      <div class="pstat"><div class="pstat-n">10+</div><div class="pstat-l">Featured Items</div></div>
+      <div class="pstat"><div class="pstat-n">24+</div><div class="pstat-l">Menu Items</div></div>
       <div class="pstat"><div class="pstat-n">100%</div><div class="pstat-l">Local SA</div></div>
       <div class="pstat"><div class="pstat-n">5.0★</div><div class="pstat-l">Google Rating</div></div>
       <div class="pstat"><div class="pstat-n">2024</div><div class="pstat-l">Est. Adelaide</div></div>
@@ -2064,13 +2108,13 @@ footer {
       <div class="tl-dot">01</div>
       <div class="tl-line"></div>
       <h3 class="tl-h">6am Sourcing</h3>
-      <p class="tl-p">Before we open, we collect from SA farms and our local bakery. Bread is baked to our spec. Produce arrives the morning it's used — nothing sits overnight.</p>
+      <p class="tl-p">Before we open, we collect from SA farms and our local bakery. Bread is baked to our spec. Produce arrives the morning it's used, so nothing sits overnight.</p>
     </div>
     <div class="tl-step reveal rd2">
       <div class="tl-dot">02</div>
       <div class="tl-line"></div>
       <h3 class="tl-h">Kitchen Prep</h3>
-      <p class="tl-p">Three hours of prep for a five-hour service. Slow roasts, brines, pickles, sauces — every condiment housemade. Every protein treated properly.</p>
+      <p class="tl-p">Three hours of prep for a five hour service. Slow roasts, brines, pickles and sauces. Every condiment housemade. Every protein treated properly.</p>
     </div>
     <div class="tl-step reveal rd3">
       <div class="tl-dot">03</div>
@@ -2082,7 +2126,7 @@ footer {
       <div class="tl-dot">04</div>
       <div class="tl-line"></div>
       <h3 class="tl-h">The Philosophy</h3>
-      <p class="tl-p">You receive something made with genuine care and serious thought. Not assembled. Not mass-produced. Crafted — and named for the idea it represents.</p>
+      <p class="tl-p">You receive something made with genuine care and serious thought. Not assembled. Not mass produced. Crafted with a name that matches the idea behind it.</p>
     </div>
   </div>
 </section>
@@ -2090,29 +2134,31 @@ footer {
 <!-- ══ STORE DETAILS ══ -->
 <section id="preorder-drop">
   <div class="preorder-wrap">
-    <div class="drop-kicker reveal">Now Open - Welland SA</div>
+    <div class="drop-kicker reveal">Now Open in Welland SA</div>
     <h2 class="drop-title reveal">Visit Our <em>First Store.</em></h2>
-    <p class="drop-copy reveal rd1">Sandwich Philosophy is now open at 508-514 Port Rd, Welland SA 5007. Walk in, order your favourites, or call ahead if you want us to get your feed started.</p>
+    <p class="drop-copy reveal rd1">Sandwich Philosophy is now open at Shop 23A/508-514 Port Rd, Welland SA 5007. Walk in, order your favourites, or call ahead if you want us to get your feed started.</p>
     <div class="drop-actions reveal rd2">
-      <a href="tel:+61416944799" class="btn-amber"><span>Call: 0416 944 799</span></a>
-      <a href="https://www.google.com/maps/search/?api=1&query=508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Get Directions</a>
+      <a href="https://www.ubereats.com/au/store/sandwich-philosophy/fd5JDhYgVnWreR1LDPdapg" class="platform-btn" target="_blank" rel="noopener" aria-label="Order on Uber Eats"><img src="images/ubereats.png" alt="Uber Eats"></a>
+      <a href="https://www.doordash.com/en-AU/store/sandwich-philosophy-welland-48154129/113720996" class="platform-btn doordash" target="_blank" rel="noopener" aria-label="Order on DoorDash"><img src="images/DoorDash-logo.png" alt="DoorDash"></a>
+      <a href="tel:+61416944799" class="btn-amber"><span>Call Store</span></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Shop%2023A%2F508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Get Directions</a>
     </div>
     <div class="drop-divider reveal rd2"></div>
     <div class="preorder-countdown reveal rd3" aria-label="Opening hours">
       <div class="count-card">
-        <span class="count-value">11-9</span>
+    <span class="count-value">11 to 9</span>
         <span class="count-label">Sunday</span>
       </div>
       <div class="count-card">
-        <span class="count-value">11-2 / 5-10</span>
+    <span class="count-value">11 to 2 / 5 to 10</span>
         <span class="count-label">Mon, Wed, Thu</span>
       </div>
       <div class="count-card">
-        <span class="count-value">5-12</span>
+    <span class="count-value">5 to 12</span>
         <span class="count-label">Friday</span>
       </div>
       <div class="count-card">
-        <span class="count-value">11-12</span>
+    <span class="count-value">11 to 12</span>
         <span class="count-label">Saturday</span>
       </div>
     </div>
@@ -2125,17 +2171,18 @@ footer {
   <div class="mystery-wrap">
     <div class="mystery-copy">
       <div class="mystery-kicker reveal">Fast Food Restaurant</div>
-      <h2 class="mystery-title reveal">Open for <em>Walk-ins.</em></h2>
+      <h2 class="mystery-title reveal">Open for <em>Walk Ins.</em></h2>
       <p class="mystery-text reveal rd1">Our first store is open through the week with burgers, sides, sauces, drinks and tacos ready from the Welland kitchen.</p>
       <p class="mystery-text reveal rd2">Find us on Port Road, follow along for daily updates, and come in hungry. The philosophy is officially open for service.</p>
       <div class="mystery-highlight reveal rd3">
         <div class="mystery-highlight-kicker">Google Rating</div>
         <h3>5.0 from 12 Google reviews</h3>
-        <p>Address: 508-514 Port Rd, Welland SA 5007. Phone: 0416 944 799.</p>
+        <p>Address: Shop 23A/508-514 Port Rd, Welland SA 5007. Phone: 0416 944 799.</p>
       </div>
       <div class="drop-actions reveal rd4">
-        <a href="tel:+61416944799" class="btn-amber"><span>Call the Store</span></a>
-        <a href="https://www.google.com/maps/search/?api=1&query=508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Open Maps</a>
+        <a href="https://www.ubereats.com/au/store/sandwich-philosophy/fd5JDhYgVnWreR1LDPdapg" class="platform-btn" target="_blank" rel="noopener" aria-label="Order on Uber Eats"><img src="images/ubereats.png" alt="Uber Eats"></a>
+        <a href="https://www.doordash.com/en-AU/store/sandwich-philosophy-welland-48154129/113720996" class="platform-btn doordash" target="_blank" rel="noopener" aria-label="Order on DoorDash"><img src="images/DoorDash-logo.png" alt="DoorDash"></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Shop%2023A%2F508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Open Maps</a>
       </div>
     </div>
     <div class="mystery-orbit reveal-right">
@@ -2206,7 +2253,7 @@ footer {
       <p class="rv-text">The Benchmark is the best burger I've had in Adelaide. Full stop. Two patties, perfectly smashed, cheese melted just right. I've been back four times in three weeks. Zero regrets.</p>
       <div class="rv-author">
         <div class="rv-av">MR</div>
-        <div class="rv-info"><strong>Marcus R.</strong><span>Regular · North Adelaide</span></div>
+      <div class="rv-info"><strong>Marcus R.</strong><span>Regular, North Adelaide</span></div>
       </div>
     </div>
     <div class="rv-card reveal rd1">
@@ -2215,16 +2262,16 @@ footer {
       <p class="rv-text">The Hot Take is criminally good. The jalapenos hit properly, the beef stays juicy, and that house sauce brings the whole thing together. Spicy option? More like the best option.</p>
       <div class="rv-author">
         <div class="rv-av">SL</div>
-        <div class="rv-info"><strong>Sophie L.</strong><span>Food Blogger · Adelaide</span></div>
+      <div class="rv-info"><strong>Sophie L.</strong><span>Food Blogger, Adelaide</span></div>
       </div>
     </div>
     <div class="rv-card reveal rd2">
       <div class="rv-q">"</div>
       <div class="rv-stars">★★★★★</div>
-      <p class="rv-text">The Existential Onion got me. I didn't expect much from an "onion burger" but it's genuinely transcendent. The Oklahoma smash technique with those onions cooked right into the patty — extraordinary.</p>
+      <p class="rv-text">The Existential Onion got me. I didn't expect much from an "onion burger" but it's genuinely transcendent. The Oklahoma smash technique with those onions cooked right into the patty is extraordinary.</p>
       <div class="rv-author">
         <div class="rv-av">JT</div>
-        <div class="rv-info"><strong>James T.</strong><span>Foodie · Unley</span></div>
+      <div class="rv-info"><strong>James T.</strong><span>Foodie, Unley</span></div>
       </div>
     </div>
   </div>
@@ -2234,28 +2281,33 @@ footer {
 <section id="social">
   <div class="social-label reveal">Follow the Philosophy</div>
   <h2 class="social-h reveal">@SandwichPhilosophy</h2>
-  <p class="social-sub reveal">Behind-the-scenes builds, daily specials and the occasional existential crisis. Come for the food, stay for the ideas.</p>
-  <a href="#" class="social-handle reveal">
+  <p class="social-sub reveal">Behind the scenes builds, daily specials and the occasional existential crisis. Come for the food, stay for the ideas.</p>
+  <a href="https://www.instagram.com/sandwichphilosophy/" class="social-handle reveal" target="_blank" rel="noopener">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
     Follow on Instagram
+  </a>
+  <a href="https://www.facebook.com/sandwichphilosophy/" class="social-handle reveal rd1" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V14h2.8v8h3.4z"/></svg>
+    Follow on Facebook
   </a>
 </section>
 
 <!-- ══ CTA ══ -->
 <section id="cta">
   <div class="cta-bg-img">
-    <img src="images/existential-onion.png" alt="The Existential Onion">
+    <img src="images/Sandwich philosophy_Hero_01_2880x2304.jpg" alt="Sandwich Philosophy hero spread">
   </div>
   <div class="cta-content">
-    <div class="cta-label reveal">508-514 Port Rd, Welland SA 5007</div>
+    <div class="cta-label reveal">Shop 23A/508-514 Port Rd, Welland SA 5007</div>
     <h2 class="cta-h reveal">Come Hungry.<br><em>Leave Convinced.</em></h2>
-    <p class="cta-sub reveal">Walk in. Sit down. Let the sandwich do the philosophy. We'll be here, thinking very carefully about every single layer of your next meal.</p>
-    <div class="cta-actions reveal">
-      <a href="#signatures" class="btn-amber"><span>See The Menu</span></a>
-      <a href="https://www.google.com/maps/search/?api=1&query=508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Find Us on Maps</a>
+    <p class="cta-sub reveal">Walk in, sit down, or order pickup through Uber Eats and DoorDash. We'll be here, thinking very carefully about every single layer of your next meal.</p>
+    <div class="cta-actions order-platforms reveal">
+      <a href="https://www.ubereats.com/au/store/sandwich-philosophy/fd5JDhYgVnWreR1LDPdapg" class="platform-btn" target="_blank" rel="noopener" aria-label="Order on Uber Eats"><img src="images/ubereats.png" alt="Uber Eats"></a>
+      <a href="https://www.doordash.com/en-AU/store/sandwich-philosophy-welland-48154129/113720996" class="platform-btn doordash" target="_blank" rel="noopener" aria-label="Order on DoorDash"><img src="images/DoorDash-logo.png" alt="DoorDash"></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Shop%2023A%2F508-514%20Port%20Rd%2C%20Welland%20SA%205007" class="btn-ghost">Find Us on Maps</a>
     </div>
     <div class="hours-band reveal rd2">
-      <div class="hb"><span>Address</span><b>508-514 Port Rd</b></div>
+      <div class="hb"><span>Address</span><b>Shop 23A/508-514 Port Rd</b></div>
       <div class="hb"><span>Phone</span><b>0416 944 799</b></div>
       <div class="hb"><span>Closed</span><b>Tuesday</b></div>
       <div class="hb"><span>Location</span><b>Welland SA</b></div>
@@ -2269,38 +2321,37 @@ footer {
     <div class="fb">
       <img src="images/logo.png" alt="Logo" class="fb-logo" style="width:70px;height:70px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(184,116,14,.3));margin-bottom:16px;">
       <div class="fb-name">Sandwich Philosophy</div>
-      <div class="fb-sub">Now Open · Welland SA</div>
-      <p>Taking the humble sandwich seriously from 508-514 Port Rd, Welland SA. Locally sourced, obsessively crafted, deliberately named.</p>
+      <div class="fb-sub">Now Open in Welland SA</div>
+      <p>Taking the humble sandwich seriously from Shop 23A/508-514 Port Rd, Welland SA. Locally sourced, obsessively crafted, deliberately named.</p>
     </div>
     <div class="fc">
       <h4>The Menu</h4>
       <ul>
         <li>The Benchmark</li>
-        <li>The Hot Take</li>
         <li>The Existential Onion</li>
+        <li>The Red Line</li>
+        <li>Birria Tacos</li>
         <li>The Crunch Theory</li>
-        <li>The Foundation</li>
       </ul>
     </div>
     <div class="fc">
       <h4>Visit</h4>
       <ul>
-        <li>508-514 Port Rd, Welland SA 5007</li>
+        <li>Shop 23A/508-514 Port Rd, Welland SA 5007</li>
         <li>Phone: 0416 944 799</li>
-        <li>Sunday: 11 am-9 pm</li>
-        <li>Monday, Wednesday, Thursday: 11 am-2 pm, 5-10 pm</li>
-        <li>Friday: 5 pm-12 am · Saturday: 11 am-12 am</li>
+        <li>Sunday: 11 am to 9 pm</li>
+        <li>Monday, Wednesday, Thursday: 11 am to 2 pm, 5 to 10 pm</li>
+        <li>Friday: 5 pm to 12 am, Saturday: 11 am to 12 am</li>
         <li>Tuesday: Closed</li>
       </ul>
     </div>
     <div class="fc">
       <h4>Connect</h4>
       <ul>
-        <li>Instagram</li>
-        <li>Facebook</li>
-        <li>TikTok</li>
+        <li><a href="https://www.instagram.com/sandwichphilosophy/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/sandwichphilosophy/" target="_blank" rel="noopener">Facebook</a></li>
         <li>Catering Enquiries</li>
-        <li>Contact Us</li>
+        <li><a href="contact.html">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -2409,7 +2460,7 @@ const statsObs = new IntersectionObserver(entries => {
         const txt = el.textContent;
         if (txt.includes('★')) countUp(el, 5.0, '★');
         else if (txt.includes('%')) countUp(el, 100, '%');
-        else if (txt.includes('+')) countUp(el, 18, '+');
+        else if (txt.includes('+')) countUp(el, 24, '+');
         else if (txt === '2024') countUp(el, 2024);
       });
       statsObs.unobserve(e.target);
